@@ -729,6 +729,7 @@ p {
         height: 199px;
         margin-right: 0;
         box-shadow: none;
+        background: 50px 41px url(../img/logo.svg) #060606 no-repeat;
     }
 
     .logo__name {
