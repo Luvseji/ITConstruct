@@ -726,7 +726,7 @@ p {
     .logo {
         display: block;
         border: none;
-        width: 206;
+        height: 199px;
         margin-right: 0;
         box-shadow: none;
     }
