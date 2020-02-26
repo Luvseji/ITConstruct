@@ -116,7 +116,7 @@ input {
     margin: 0 0 54px 0;
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(to top, rgba(75, 75, 75, 0), rgba(0, 0, 0, 0.73)), url(../img/sprites/sprite-head-foot.webp);
+    background-image: linear-gradient(to top, rgba(75, 75, 75, 0), rgba(0, 0, 0, 0.73)), url(../img/sprites/sprite-head-foot.jpg);
     background-size: 8px;
 }
 
@@ -132,7 +132,7 @@ input {
     width: 209px;
     min-width: 209px;
     height: 201px;
-    background: 34px 40px url(../img/header__logo.webp) #060606 no-repeat;
+    background: 34px 40px url(../img/header__logo.jpg) #060606 no-repeat;
     background-size: 135px;
     border: 1px solid #818181;
     border-radius: 18px;
@@ -152,7 +152,7 @@ input {
     .header__preview {
         width: 725px;
         height: 201px;
-        background: url(../img/header-preview.webp) center no-repeat;
+        background: url(../img/header-preview.jpg) center no-repeat;
         background-size: cover;
         border: 1px solid #818181;
         border-radius: 18px;
@@ -232,10 +232,10 @@ input {
         font: 12px "Tahoma", "Geneva", sans-serif;
         display: flex;
         align-items: center;
-        box-shadow: 5px 8px 21px #000000;
+        box-shadow: 5px 5px 21px #000000;
         border: 1px solid #818181;
         border-radius: 18px;
-        background-image: url(../img/sprites/sprite-menu.webp);
+        background-image: url(../img/sprites/sprite-menu.jpg);
         background-size: 5px;
     }
 
@@ -339,6 +339,7 @@ input {
     .cart__link:visited,
     .cart__link:active {
         color: #ffffff;
+        position: relative;
     }
 
     .cart__link:hover {
@@ -353,7 +354,7 @@ input {
         height: auto;
         min-height: 48px;
         width: 100%;
-        background-image: linear-gradient(to top, rgba(15, 33, 41, 0.5), rgba(0, 0, 0, 0.75)), url(../img/sprites/sprite-nav.webp);
+        background-image: linear-gradient(to top, rgba(15, 33, 41, 0.5), rgba(0, 0, 0, 0.75)), url(../img/sprites/sprite-nav.jpg);
         background-size: 20px;
         box-shadow: 5px 0.5px 10px #000000;
     }
@@ -551,7 +552,7 @@ input {
 .footer {
     padding: 15px 0 0 0;
     height: 170px;
-    background-image: linear-gradient(to top, rgba(75, 75, 75, 0), rgba(0, 0, 0, 0.73)), url(../img/sprites/sprite-head-foot.webp);
+    background-image: linear-gradient(to top, rgba(75, 75, 75, 0), rgba(0, 0, 0, 0.73)), url(../img/sprites/sprite-head-foot.jpg);
     background-size: 8px;
 }
 
