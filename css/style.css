@@ -563,6 +563,7 @@ input {
 =====================================*/
 
 .footer {
+    clear: both;
     padding: 15px 0 0 0;
     height: 170px;
     background-image: linear-gradient(to top, rgba(75, 75, 75, 0), rgba(0, 0, 0, 0.73)), url(../img/sprites/sprite-head-foot.png);
