@@ -16,7 +16,7 @@ $(function () {
         $(this).parent().toggleClass("sub-navigation__move");
     });
     /*Form's checker*/
-    $(".authorization-field").on('keyup', function () {
+    $(".authorization-field").on('blur', function () {
         var $this = $(this),
             val = $this.val();
 
