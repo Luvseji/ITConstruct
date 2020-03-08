@@ -313,7 +313,9 @@ input {
     }
 
     .authorization__sign-in-mob,
-    .authorization__sign-in-mob:visited {
+    .authorization__sign-in-mob:link,
+    .authorization__sign-in-mob:visited,
+    .authorization__sign-in-mob:active {
         display: none;
         font: 12px "Tahoma", "Geneva", sans-serif;
         text-decoration: underline;
@@ -716,6 +718,10 @@ input {
 
 @media (max-width: 480px) {
 
+    body {
+        min-width: 480px;
+    }
+
     .container {
         max-width: 427px;
         min-width: 427px;
@@ -810,8 +816,11 @@ input {
         display: none;
     }
 
-    .authorization__sign-in-mob {
-        display: block;
+    .authorization__sign-in-mob,
+    .authorization__sign-in-mob:link,
+    .authorization__sign-in-mob:visited,
+    .authorization__sign-in-mob:active {
+        display:inline;
         margin: 0 22px 0 3px;
     }
 

@@ -26,6 +26,20 @@
     padding: 0 0 0 218px;
 }
 
+    .path__past {
+        margin: 0 14px 0 0;
+        position: relative;
+    }
+
+    .path__present {
+        position: relative;
+    }
+
+        .path__past::after {
+            content: "\2192";
+            position: absolute;
+        }
+
     .path__past > a {
         color: #9d9d9d;
     }
@@ -34,8 +48,8 @@
         display: inline;
     }
 
-    .path__present {
-        margin: 0 3px 0 0;
+    .path__present span {
+        margin: 0 0 0 6px;
     }
 
 .product {
