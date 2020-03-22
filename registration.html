@@ -25,15 +25,15 @@
             </div>
             <div class="header__menu">
                 <div class="header__menu-inner">
-                    <form action="#" method="post">
+                    <form action="#" method="post" id="header__form">
                         <div class="authorization header__authorization">
                             <div class="authorization__login">
                                 <label class="authorization__label" for="h-login-field">Логин:</label>
-                                <input id="h-login-field" class="authorization-field" type="text" name="h-login">
+                                <input id="h-login-field" class="authorization-field field-empty-check" type="text" name="h-login">
                             </div>
                             <div class="authorization__password">
                                 <label class="authorization__label" for="h-password-field">Пароль:</label>
-                                <input id="h-password-field" class="authorization-field" type="text" name="h-password">
+                                <input id="h-password-field" class="authorization-field field-empty-check" type="text" name="h-password">
                             </div>
                             <button name="sign-in" type="submit" class="authorization__sign-in authorization__sign-in-pc">Войти</button>
                             <a href="login.html" class="authorization__sign-in-mob">Войти</a>
@@ -108,40 +108,42 @@
     </header>
     <div class="content">
         <div class="container">
-            <div class="content__main">
-                <div class="registration content__registration">
-                    <h2 class="registration__title">Регистрация</h2>
-                    <span class="red-star">*</span> — обязательные для заполнения поля
-                    <div class="registration__server-errors">
-                        Поле «Имя» должно быть заполнено<br>
-                        Пользователь с такой электронной почтой уже зарегистрирован<br>
-                        Поле «Подтерждение пароля» должно быть заполнено<br>
-                        Поле «Пароль» должно быть заполнено<br>
+            <div class="content__inner">
+                <main class="content__main">
+                    <div class="registration content__registration">
+                        <h2 class="registration__title">Регистрация</h2>
+                        <span class="red-star">*</span> — обязательные для заполнения поля
+                        <div class="registration__server-errors">
+                            Поле «Имя» должно быть заполнено<br>
+                            Пользователь с такой электронной почтой уже зарегистрирован<br>
+                            Поле «Подтерждение пароля» должно быть заполнено<br>
+                            Поле «Пароль» должно быть заполнено<br>
+                        </div>
+                        <form action="#" method="post" class="registration__form" id="registration__form">
+                            <div class="registration__name">
+                                <label for="name-field" class="registration__label label-ch">Имя</label>
+                                <input type="text" class="registration__field field-empty-check" id="name-field" name="name">
+                            </div>
+                            <div class="registration__email">
+                                <label for="email-field" class="registration__label label-ch">Электронная почта</label>
+                                <input type="text" class="registration__field field-empty-check email" id="email-field" name="email">
+                            </div>
+                            <div class="registration__phone">
+                                <label for="phone-field" class="registration__label">Телефон</label>
+                                <input type="text" class="registration__field" id="phone-field" name="phone">
+                            </div>
+                            <div class="registration__password">
+                                <label for="password-field" class="registration__label label-ch">Пароль</label>
+                                <input type="password" class="registration__field field-empty-check password" id="password-field" name="password">
+                            </div>
+                            <div class="registration__password-check">
+                                <label for="password-check-field" class="registration__label label-ch">Подтверждение пароля</label>
+                                <input type="password" class="registration__field field-empty-check password-check" id="password-check-field" name="password-check">
+                            </div>
+                            <button class="registration__submit" type="submit">Зарегистрироваться</button>
+                        </form>
                     </div>
-                    <form action="#" method="post" class="form-ch">
-                        <div class="registration__name">
-                            <label for="name-field" class="registration__label label-ch">Имя</label>
-                            <input type="text" class="registration__field field-empty-check" id="name-field" name="name">
-                        </div>
-                        <div class="registration__email">
-                            <label for="email-field" class="registration__label label-ch">Электронная почта</label>
-                            <input type="text" class="registration__field field-empty-check email" id="email-field" name="email">
-                        </div>
-                        <div class="registration__phone">
-                            <label for="phone-field" class="registration__label">Телефон</label>
-                            <input type="text" class="registration__field" id="phone-field" name="phone">
-                        </div>
-                        <div class="registration__password">
-                            <label for="password-field" class="registration__label label-ch">Пароль</label>
-                            <input type="password" class="registration__field field-empty-check password" id="password-field" name="password">
-                        </div>
-                        <div class="registration__password-check">
-                            <label for="password-check-field" class="registration__label label-ch">Подтверждение пароля</label>
-                            <input type="password" class="registration__field field-empty-check password-check" id="password-check-field" name="password-check">
-                        </div>
-                        <button class="registration__submit submit-ch" type="submit">Зарегистрироваться</button>
-                    </form>
-                </div>
+                </main>
             </div>
             <div class="side-bar">
                 <section class="category-list content__category-list">
@@ -261,5 +263,5 @@
     </footer>
     <!-- JavaScript -->
     <script src="js/app.js"></script>
-    <script src="js/validator__registration.js"></script>
-</body></html>
+</body>
+</html>

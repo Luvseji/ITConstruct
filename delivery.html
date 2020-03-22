@@ -25,15 +25,15 @@
             </div>
             <div class="header__menu">
                 <div class="header__menu-inner">
-                    <form action="#" method="post">
+                    <form action="#" method="post" id="header__form">
                         <div class="authorization header__authorization">
                             <div class="authorization__login">
                                 <label class="authorization__label" for="h-login-field">Логин:</label>
-                                <input id="h-login-field" class="authorization-field" type="text" name="h-login">
+                                <input id="h-login-field" class="authorization-field field-empty-check" type="text" name="h-login">
                             </div>
                             <div class="authorization__password">
                                 <label class="authorization__label" for="h-password-field">Пароль:</label>
-                                <input id="h-password-field" class="authorization-field" type="text" name="h-password">
+                                <input id="h-password-field" class="authorization-field field-empty-check" type="text" name="h-password">
                             </div>
                             <button name="sign-in" type="submit" class="authorization__sign-in authorization__sign-in-pc">Войти</button>
                             <a href="login.html" class="authorization__sign-in-mob">Войти</a>
@@ -108,8 +108,8 @@
     </header>
     <div class="content">
         <div class="container">
-            <div class="content__main">
-                <div class="delivery content__delivery">
+            <div class="content__inner">
+                <main class="content__main">
                     <h2>Доставка</h2>
                     <h3>Уважаемые покупатели!</h3>
                     <p>Оплатить свой заказ Вы можете любым из следующих способов:</p>
@@ -125,7 +125,7 @@
                     <p>Доставка по Москве крупногабаритных товаров (от 5 кг) - <b>300 р.</b></p>
                     <p>Доставка за пределы МКАД - по договоренности</p>
                     <p><i>Также, Вы имеете возможность приобрести товары в нашем шоу-руме на м.Сходненская</i></p>
-                </div>
+                </main>
             </div>
             <div class="side-bar">
                 <section class="category-list content__category-list">
@@ -245,4 +245,5 @@
     </footer>
     <!-- JavaScript -->
     <script src="js/app.js"></script>
-</body></html>
+</body>
+</html>

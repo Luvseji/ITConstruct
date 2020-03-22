@@ -25,15 +25,15 @@
             </div>
             <div class="header__menu">
                 <div class="header__menu-inner">
-                    <form action="#" method="post">
+                    <form action="#" method="post" id="header__form">
                         <div class="authorization header__authorization">
                             <div class="authorization__login">
                                 <label class="authorization__label" for="h-login-field">Логин:</label>
-                                <input id="h-login-field" class="authorization-field" type="text" name="h-login">
+                                <input id="h-login-field" class="authorization-field field-empty-check" type="text" name="h-login">
                             </div>
                             <div class="authorization__password">
                                 <label class="authorization__label" for="h-password-field">Пароль:</label>
-                                <input id="h-password-field" class="authorization-field" type="text" name="h-password">
+                                <input id="h-password-field" class="authorization-field field-empty-check" type="text" name="h-password">
                             </div>
                             <button name="sign-in" type="submit" class="authorization__sign-in authorization__sign-in-pc">Войти</button>
                             <a href="login.html" class="authorization__sign-in-mob">Войти</a>
@@ -108,74 +108,76 @@
     </header>
     <div class="content">
         <div class="container">
-            <div class="content__main">
-                <ul class="category">
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-1.jpg" alt="" class="category__image">
-                                <span class="category__title">Электронные сигареты</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-2.jpg" alt="" class="category__image">
-                                <span class="category__title">Трубки</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-3.jpg" alt="" class="category__image">
-                                <span class="category__title">Жидкости для заправки</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-4.jpg" alt="" class="category__image">
-                                <span class="category__title">Аккумуляторы и атомайзеры</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-5.jpg" alt="" class="category__image">
-                                <span class="category__title">Картриджи</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-6.jpg" alt="" class="category__image">
-                                <span class="category__title">Зарядные устройства</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-7.jpg" alt="" class="category__image">
-                                <span class="category__title">Аксессуары</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap">
-                        <div class="category__item">
-                            <a href="#" class="category__link">
-                                <img src="img/categories/category__cat-8.jpg" alt="" class="category__image">
-                                <span class="category__title">Подарочне наборы</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="category__item-wrap"></li>
-                </ul>
+            <div class="content__inner">
+               <main class="content__main">
+                    <ul class="category">
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-1.jpg" alt="" class="category__image">
+                                    <span class="category__title">Электронные сигареты</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-2.jpg" alt="" class="category__image">
+                                    <span class="category__title">Трубки</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-3.jpg" alt="" class="category__image">
+                                    <span class="category__title">Жидкости для заправки</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-4.jpg" alt="" class="category__image">
+                                    <span class="category__title">Аккумуляторы и атомайзеры</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-5.jpg" alt="" class="category__image">
+                                    <span class="category__title">Картриджи</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-6.jpg" alt="" class="category__image">
+                                    <span class="category__title">Зарядные устройства</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-7.jpg" alt="" class="category__image">
+                                    <span class="category__title">Аксессуары</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap">
+                            <div class="category__item">
+                                <a href="#" class="category__link">
+                                    <img src="img/categories/category__cat-8.jpg" alt="" class="category__image">
+                                    <span class="category__title">Подарочне наборы</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="category__item-wrap"></li>
+                    </ul>
+                </main>
                 <div class="side-bar">
                     <section class="category-list content__category-list">
                         <h2 class="category-list__headline">Каталог</h2>

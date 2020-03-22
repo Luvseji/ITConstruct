@@ -25,15 +25,15 @@
             </div>
             <div class="header__menu">
                 <div class="header__menu-inner">
-                    <form action="#" method="post">
+                    <form action="#" method="post" id="header__form">
                         <div class="authorization header__authorization">
                             <div class="authorization__login">
                                 <label class="authorization__label" for="h-login-field">Логин:</label>
-                                <input id="h-login-field" class="authorization-field" type="text" name="h-login">
+                                <input id="h-login-field" class="authorization-field field-empty-check" type="text" name="h-login">
                             </div>
                             <div class="authorization__password">
                                 <label class="authorization__label" for="h-password-field">Пароль:</label>
-                                <input id="h-password-field" class="authorization-field" type="text" name="h-password">
+                                <input id="h-password-field" class="authorization-field field-empty-check" type="text" name="h-password">
                             </div>
                             <button name="sign-in" type="submit" class="authorization__sign-in authorization__sign-in-pc">Войти</button>
                             <a href="login.html" class="authorization__sign-in-mob">Войти</a>
@@ -108,21 +108,23 @@
     </header>
     <div class="content">
         <div class="container">
-            <div class="content__main">
-                <div class="login content__login">
-                    <h2 class="login__title">Вход</h2>
-                    <form action="#" method="post">
-                        <div class="login__email">
-                            <label for="email-field" class="login__label">Электронная почта</label>
-                            <input type="text" class="login__field" id="email-field">
-                        </div>
-                        <div class="login__password">
-                            <label for="password-field" class="login__label">Пароль</label>
-                            <input type="text" class="login__field" id="password-field">
-                        </div>
-                        <button class="login__submit" type="submit">Войти</button>
-                    </form>
-                </div>
+            <div class="content__inner">
+                <main class="content__main">
+                    <div class="login content__login">
+                        <h2 class="login__title">Вход</h2>
+                        <form action="#" method="post">
+                            <div class="login__email">
+                                <label for="email-field" class="login__label">Электронная почта</label>
+                                <input type="text" class="login__field" id="email-field">
+                            </div>
+                            <div class="login__password">
+                                <label for="password-field" class="login__label">Пароль</label>
+                                <input type="text" class="login__field" id="password-field">
+                            </div>
+                            <button class="login__submit" type="submit">Войти</button>
+                        </form>
+                    </div>
+                </main>
             </div>
             <div class="side-bar">
                 <section class="category-list content__category-list">
@@ -242,4 +244,5 @@
     </footer>
     <!-- JavaScript -->
     <script src="js/app.js"></script>
-</body></html>
+</body>
+</html>

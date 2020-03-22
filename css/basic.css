@@ -74,7 +74,7 @@ ol, ul {
 
 p {
     margin: 0 0 16px 0;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 16px;
 }
 
@@ -740,14 +740,17 @@ input {
 /* PRODUCT
 =====================================*/
 
-.content__path {
-    margin: 1px 0 25px 0;
+.content__inner {
+    padding: 0 0 0 220px;
+    float: left;
+    width: 100%;
 }
+
 
 .path {
     font-size: 11px;
     color: #9d9d9d;
-    padding: 0 0 0 218px;
+    padding: 1px 0 11px 0;
 }
 
     .path__past {
@@ -777,7 +780,8 @@ input {
     }
 
 .product {
-    padding: 0 0 0 218px;
+    padding: 15px 0 0 0;
+    margin: 0 0 0 -2px;
 }
 
     .product__item {
@@ -814,7 +818,7 @@ input {
     }
 
     .product__actions {
-        margin: 16px 0 0 0;
+        margin: 14px 0 0 0;
         display: flex;
         text-align: center;
     }
@@ -842,6 +846,26 @@ input {
         width: 35px;
         text-align: center;
         font-size: 13px;
+    }
+
+    .counter__number-display::-webkit-outer-spin-button,
+    .counter__number-display::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .counter__number-display {
+      -moz-appearance: textfield;
+    }
+    .counter__number-display:hover,
+    .counter__number-display:focus {
+      -moz-appearance: number-input;
+    }
+
+    .counter__number-display::-webkit-inner-spin-button,
+    .counter__number-display::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
 
     .counter__plus {
@@ -906,6 +930,7 @@ input {
         font-size: 12px;
         line-height: 16px;
         text-align: justify;
+        color: #666666;
     }
 
     .category-list__link_active,
@@ -927,7 +952,7 @@ input {
 
 .category {
     float: left;
-    padding: 3px 0 0 220px;
+    padding: 3px 0 0 0;
     font-size: 15px;
     margin: 0 0 13px 0;
     display: flex;
@@ -967,7 +992,6 @@ input {
 
     .content__description {
         overflow: hidden;
-        padding: 0 0 0 220px;
         margin: 12px 0 80px -2px;
     }
 
@@ -982,20 +1006,16 @@ input {
 /* CATALOG
 =====================================*/
 
-    .content__catalog > .content__path {
-        margin: 1px 0 11px 0;
-    }
-
 .goods {
-
+    padding: 0 4px 0 3px;
 }
 
     .goods__price-sort {
-        margin: 11px 0 30px 0;
+        margin: 0 0 30px 0;
     }
 
 .price-sort {
-    padding: 0 0 0 219px;
+
 }
 
     .price-sort > form > span {
@@ -1033,7 +1053,6 @@ input {
     }
 
     .goods__list {
-        padding: 0 0 0 218px;
         font-size: 15px;
         margin: 0 0 4px 0;
         display: flex;
@@ -1110,7 +1129,7 @@ input {
 
 .pages {
     font-size: 13px;
-    padding: 0 0 0 401px;
+    padding: 0 0 0 181px;
     margin: 0 0 64px 0;
     display: flex;
 }
@@ -1137,11 +1156,10 @@ input {
 =====================================*/
 
 .content__contacts {
-        margin: 1px 0 78px 0;
+        margin: 1px 0 78px -2px;
     }
 
 .contacts {
-    padding: 0 0 0 218px;
     color: #000000;
 
 }
@@ -1193,7 +1211,6 @@ input {
     }
 
 .feedback {
-    padding: 0 0 0 220px;
     font-size: 13px;
     margin: 0 0 64px 0;
 }
@@ -1330,10 +1347,6 @@ input {
         margin: 0 0 0 0px;
     }
 
-.border-error {
-    border: 1px solid #ff0000;
-}
-
 .error {
     color: #ff0000;
     position: absolute;
@@ -1344,31 +1357,25 @@ input {
 /* DELIVERY
 =====================================*/
 
-.content__delivery {
-        margin: 2px 0 0 3px;
-    }
-
-.delivery {
-    padding: 0 0 0 218px;
+.content__main {
     color: #000000;
     font-size: 13px;
 }
-
-    .delivery h2 {
+    .content__main > h2 {
         font-size: 17px;
         margin: 0 0 26px -3px;
     }
 
-    .delivery h3 {
+    .content__main > h3 {
         margin: 0 0 17px 0;
     }
 
-    .delivery ol {
+    .content__main > ol {
         list-style: decimal inside;
         margin: 0 0 18px 0;
     }
 
-    .delivery p {
+    .content__main > p {
         font-size: 13px;
         margin: 0 0 18px 0;
         line-height: 18px;
@@ -1378,7 +1385,7 @@ input {
 =====================================*/
 
 .login {
-    padding: 0 0 0 218px;
+
 }
 
     .login__title {
@@ -1405,6 +1412,7 @@ input {
 
     .login__label {
         font-size: 12px;
+        color: #424242;
     }
 
     .login__field {
@@ -1431,12 +1439,11 @@ input {
 /* REGISTRATION
 =====================================*/
 
-.content__registration {
+    .content__registration {
         margin: 0 0 64px 0;
     }
 
 .registration {
-    padding: 0 0 0 220px;
     font-size: 13px;
 }
 
@@ -1542,10 +1549,18 @@ input {
         left: 159px;
     }
 
+.border-error {
+    border: 1px solid #ff0000;
+}
+
 /* MEDIA
 =====================================*/
 
 @media (max-width: 480px) {
+
+    .content__inner {
+        padding: 0;
+    }
 
     .content__main {
         float: none;
@@ -1851,11 +1866,11 @@ input {
     }
 
     .content__path {
-        margin: 1px 0 49px 2px;
+        margin: 1px 0 21px 2px;
     }
 
-    .product{
-        padding: 0;
+    .product {
+        padding: 28px 0 0 2px;
     }
 
     .product__image {
@@ -1868,6 +1883,10 @@ input {
         position: relative;
         flex-direction: column;
         margin: 0 0 38px 0;
+    }
+
+    .product__actions {
+        margin: 15px 0 0 0;
     }
 
     .product__title {
@@ -2060,14 +2079,6 @@ input {
     /* CATALOG
 =====================================*/
 
-    .content__catalog {
-        margin: 0 0 0 3px;
-    }
-
-    .content__catalog > .content__path {
-        margin: 11px 0 11px 0;
-    }
-
     .price-sort {
         padding: 0;
     }
@@ -2172,7 +2183,7 @@ input {
     }
 
     .pages {
-        padding: 0 0 0 57px;
+        padding: 0 0 0 59px;
         margin: 0 0 72px 0;
     }
 
@@ -2287,26 +2298,22 @@ input {
 
     /* DELIVERY
 =====================================*/
-
-    .delivery {
+    .content__main {
         padding: 0;
+        margin: 10px 0 0 0;
     }
 
-    .delivery h2 {
+    .content__main > h2 {
         font-size: 18px;
         margin: 0 0 26px 0;
     }
 
-    .delivery h3  {
+    .content__main > h3  {
         font-size: 15px;
     }
 
-    .delivery  p, .delivery ol {
+    .content__main >  p, .content__main > ol {
         font-size: 15px;
-    }
-
-    .content__delivery {
-        margin: 10px 0 50px 0;
     }
 
     /* LOGIN
