@@ -547,7 +547,7 @@ input {
     font-weight: 600;
 }
 
-.label-ch::after {
+.feedback__label_star::after, .registration__label_star::after {
     content: "*";
     font-weight: 600;
     font-size: 13px;
@@ -871,6 +871,7 @@ input {
     .counter__plus {
         position: relative;
         font-size: 17px;
+        padding: 1px 0 0 0;
         height: 24px;
         width: 20px;
         border: none;
@@ -880,25 +881,6 @@ input {
         border-radius: 0 6px 6px 0;
         cursor: pointer;
     }
-
-        .counter__plus::after {
-            content: "";
-            width: 9px;
-            height: 1px;
-            background-color: #000000;
-            position: absolute;
-            left: 5px;
-        }
-
-        .counter__plus::before {
-            content: "";
-            width: 1px;
-            height: 9px;
-            background-color: #000000;
-            position: absolute;
-            top: 7px;
-            left: 9px;
-        }
 
     .add-to-cart {
         margin: 2px 0 0 0;

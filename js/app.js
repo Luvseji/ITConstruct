@@ -25,6 +25,13 @@ $(function () {
             $(this).removeClass("authorization-field__filled");
         }
     });
+    /*Count display*/
+    $(".counter__number-display").on("input", function () {
+        if ($(this).val() > 99)
+            $(this).val(99);
+        if ($(this).val() < 1)
+            $(this).val(1);
+    });
     /*Count*/
     $(".counter__minus").click(function () {
         var $input = $(this).siblings("input");
@@ -43,22 +50,23 @@ $(function () {
     /*Validator's Form in Header*/
     $("#header__form").on("submit", function (event) {
         var fields = $("#header__form .field-empty-check");
+        var hasErrors = false;
         fields.removeClass("border-error");
         $.each(fields, function (i) {
             if (!fields[i].value) {
                 var field = fields[i];
                 $(field).addClass("border-error");
+                hasErrors = true;
             }
         })
-        if ((fields.hasClass("border-error")))
+        if (hasErrors)
             event.preventDefault();
-        else
-            alert("Вход инициирован");
     });
     /*Validator's Form in Contacts*/
     $("#feedback__form").on("submit", function (event) {
         var fields = $("#feedback__form .field-empty-check");
         var errors = $("#feedback__form .error");
+        var hasErrors = false;
         fields.removeClass("border-error");
         errors.remove();
         $.each(fields, function (i) {
@@ -70,12 +78,11 @@ $(function () {
                     class: "error",
                     text: "Поле «" + label + "» должно быть заполнено"
                 }).insertAfter(field);
+                hasErrors = true;
             }
         })
-        if ((fields.hasClass("border-error")))
+        if (hasErrors)
             event.preventDefault();
-        else
-            alert("Отправка инициирована");
     });
     /*Validator's Form in Registration*/
     $("#registration__form").on('submit', function (event) {
@@ -86,6 +93,7 @@ $(function () {
         var passwordConfirmation = $("#registration__form .password-check");
         var email = $("#registration__form .email");
         var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+        var hasErrors = false;
         fields.removeClass("border-error");
         errors.remove();
         passwordConfirmation.removeClass("border-error")
@@ -99,6 +107,7 @@ $(function () {
                     class: "error",
                     text: "Поле «" + label + "» должно быть заполнено"
                 }).insertAfter(field);
+                hasErrors = true;
             }
         })
         if (email !== null) {
@@ -108,6 +117,7 @@ $(function () {
                     class: "error",
                     text: "Неверный адрес электронной почты"
                 }).insertAfter(email);
+                hasErrors = true;
             }
         }
         if (password !== null) {
@@ -117,11 +127,10 @@ $(function () {
                     class: "error",
                     text: "Пароли должны совпадать"
                 }).insertAfter(passwordConfirmation);
+                hasErrors = true;
             }
         }
-        if ((fields.hasClass("border-error")) || (passwordConfirmation.hasClass("border-error")) || (email.hasClass("border-error")))
+        if (hasErrors)
             event.preventDefault();
-        else
-            alert("Регистрация инициирована");
     });
 });
