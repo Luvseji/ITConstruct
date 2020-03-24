@@ -86,7 +86,6 @@ $(function () {
     });
     /*Validator's Form in Registration*/
     $("#registration__form").on('submit', function (event) {
-        event.preventDefault()
         var fields = $("#registration__form .field-empty-check");
         var errors = $("#registration__form .error");
         var password = $("#registration__form .password");

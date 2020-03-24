@@ -547,7 +547,7 @@ input {
     font-weight: 600;
 }
 
-.feedback__label_star::after, .registration__label_star::after {
+.feedback__label_important::after, .registration__label_important::after {
     content: "*";
     font-weight: 600;
     font-size: 13px;
