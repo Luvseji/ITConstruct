@@ -1539,8 +1539,10 @@ pre {
 
     .product__image {
         margin: 0 0 0 2px;
-        width: 426px;
-        height: 300px;
+        min-width: 426px;
+        max-width: 426px;
+        min-height: 300px;
+        max-height: 300px;
     }
 
     .product__item {
@@ -1563,6 +1565,7 @@ pre {
     .product__description {
         margin: 0 0 49px 2px;
         text-align: left;
+        font-size: 15px;
     }
 
     .product__description > p {
@@ -1852,6 +1855,11 @@ pre {
         margin: 15px 0 0 0;
     }
 
+    .feedback__server-succsess {
+        width: auto;
+        margin: 15px 0 0 0;
+    }
+
     .feedback__name, .feedback__email, .feedback__phone {
         align-items: baseline;
         flex-direction: column;
@@ -1965,6 +1973,10 @@ pre {
     .article__title {
         margin: 8px 0 20px 0;
         font-size: 18px;
+    }
+
+    .article__description {
+        font-size: 15px;
     }
 
 }

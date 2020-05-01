@@ -44,30 +44,15 @@ require 'inc/headers.inc.php';
                         <li class="navigation__item navigation__item-mob sub-navigation">
                             <a href="#" class="navigation__link sub-navigation__link navigation__link-catalog">Каталог</a>
                             <ul class="catalog sub-navigation__inner">
+                               <?php
+                                foreach ($categories_name as $item) {
+                                ?>
                                 <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Электронные сигареты</a>
+                                    <a href="?id=1&cat_id=<?= $item['id']?>" class="catalog__link"><?= $item['name']?></a>
                                 </li>
-                                <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Трубки</a>
-                                </li>
-                                <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Картриджи</a>
-                                </li>
-                                <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Аккумуляторы и атомайзеры</a>
-                                </li>
-                                <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Аксессуары</a>
-                                </li>
-                                <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Зарядные устройства</a>
-                                </li>
-                                <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Жидкости для заправки</a>
-                                </li>
-                                <li class="catalog__item">
-                                    <a href="#" class="catalog__link">Подарочные наборы</a>
-                                </li>
+                                <?php
+                                }
+                                ?>
                             </ul>
                         </li>
                         <li class="navigation__item navigation__item-pc">
