@@ -99,6 +99,10 @@ input {
     box-sizing: border-box;
 }
 
+pre {
+    font: 14px/18px "Arial", sans-serif;
+}
+
 /* CONTAINER
 =====================================*/
 .container {
@@ -121,7 +125,7 @@ input {
 }
 
     .header__pics {
-        margin: 15px 2px 0 0;
+        margin: 15px 2px 54px 0;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -221,164 +225,6 @@ input {
         color: #e7eeef;
     }
 
-    .header__menu {
-        margin: 9px 3px 9px 0;
-        position: relative;
-    }
-
-    .header__menu-inner {
-        height: 100%;
-        color: #bfbfbf;
-        font: 12px "Tahoma", "Geneva", sans-serif;
-        display: flex;
-        align-items: center;
-        box-shadow: 5px 5px 21px #000000;
-        border: 1px solid #818181;
-        border-radius: 18px;
-        background-image: url(../img/sprites/menu__sprite.png);
-        background-size: 5px;
-    }
-
-    .header__authorization {
-        margin: 0 0 0 22px;
-    }
-
-.authorization {
-    display: flex;
-    align-items: center;
-
-}
-
-    .authorization__login {
-        margin: 7px 21px 5px 0;
-        display: flex;
-    }
-
-    .authorization__label {
-        padding: 3px 0 0 0;
-    }
-
-    .authorization__password {
-        margin: 4px 14px 0 0;
-        display: flex;
-    }
-
-    .authorization__password .authorization__label {
-        padding: 4px 0 0 0;
-    }
-
-    .authorization__password .authorization-field {
-        margin: 0 0 2px 7px;
-    }
-
-    .authorization-field {
-        margin: 0 0 0 7px;
-        width: 116px;
-        height: 22px;
-        border-radius: 5px;
-        border: none;
-        background-color: #737b7d;
-        padding: 0 8px 0 8px;
-    }
-
-    .authorization-field:focus {
-        background-color: #ffffff;
-        outline: none;
-    }
-
-    .authorization-field__filled {
-            background-color: #ffffff;
-            outline: none;
-    }
-
-    .authorization__sign-in,
-    .authorization__sign-in:link,
-    .authorization__sign-in:visited,
-    .authorization__sign-in:active {
-        display: inline-block;
-        background: none;
-        cursor: pointer;
-        font: 12px "Tahoma", "Geneva", sans-serif;
-        text-decoration: underline;
-        border: none;
-        padding: 0;
-        margin: 0 27px 0 0;
-        color: #f6f6f6;
-        font-weight: bold;
-    }
-
-    .authorization__sign-in:hover {
-        color: #ffde00;
-    }
-
-    .authorization__sign-in-mob,
-    .authorization__sign-in-mob:link,
-    .authorization__sign-in-mob:visited,
-    .authorization__sign-in-mob:active {
-        display: none;
-        font: 12px "Tahoma", "Geneva", sans-serif;
-        text-decoration: underline;
-        padding: 0;
-        margin: 0 27px 0 0;
-        color: #f6f6f6;
-        font-weight: bold;
-    }
-
-    .header__link-btn,
-    .header__link-btn:link,
-    .header__link-btn:visited,
-    .header__link-btn:active {
-        color: #f6f6f6;
-        font-weight: bold;
-    }
-
-    .header__link-btn:hover {
-        color: #ffde00;
-    }
-
-    .header__cart {
-        right: 28px;
-    }
-
-.cart {
-    display: flex;
-    position: absolute;
-    font-family: "Arial", sans-serif;
-    color: #ffffff;
-
-}
-
-    .cart__text {
-        padding: 3px 0 0 0;
-    }
-
-        .cart::before {
-            background: url(../img/icons/cart__icon-cart_yellow.png) no-repeat;
-            content: "";
-            display: block;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            left: -30px;
-            bottom: 1px;
-        }
-
-    .cart__link,
-    .cart__link:link,
-    .cart__link:visited,
-    .cart__link:active {
-        color: #ffffff;
-        position: relative;
-    }
-
-    .cart__link:hover {
-        color: #ffde00;
-    }
-
-    .cart__number {
-        font-weight: 600;
-    }
-
     .header__navigation-wrap {
         height: auto;
         min-height: 48px;
@@ -461,9 +307,10 @@ input {
 }
 
 .category-list {
-    margin: 0 0 51px;
+    margin: 0 0 41px;
     width: auto;
-    max-width: 180px;
+    max-width: 300px;
+    padding: 0 0 10px 20px;
     overflow: hidden;
 }
 
@@ -536,7 +383,7 @@ input {
         margin: 0 0 5px 0;
     }
 
-    .category-list, .news {
+    .news {
         padding: 0 0 0 20px;
         max-width: 200px;
     }
@@ -754,6 +601,7 @@ input {
 }
 
     .path__past {
+
         margin: 0 14px 0 0;
         position: relative;
     }
@@ -771,7 +619,7 @@ input {
         color: #9d9d9d;
     }
 
-    .path > li {
+    .path__inner > li {
         display: inline;
     }
 
@@ -791,8 +639,11 @@ input {
     }
 
     .product__image {
-        width: 451px;
-        height: 318px;
+        min-width: 451px;
+        max-width: 451px;
+        min-height: 318px;
+        max-height: 318px;
+        object-fit: cover;
         outline: 5px solid #797979;
         outline-offset: -5px;
     }
@@ -816,97 +667,6 @@ input {
     .product__price > .text-bold {
         font-size: 24px;
     }
-
-    .product__actions {
-        margin: 14px 0 0 0;
-        display: flex;
-        text-align: center;
-    }
-
-    .counter {
-        display: flex;
-        margin: 0 47px 0 1px;
-    }
-
-    .counter__minus {
-        font-size: 9px;
-        height: 24px;
-        width: 19px;
-        background: #ffffff;
-        border: 1px solid #dcdcdc;
-        border-right-style: none;
-        border-radius: 6px 0 0 6px;
-        padding: 0 0 0 1px;
-        cursor: pointer;
-    }
-
-    .counter__number-display {
-        font-family: arial;
-        border: 1px solid #dcdcdc;
-        width: 35px;
-        text-align: center;
-        font-size: 13px;
-    }
-
-    .counter__number-display::-webkit-outer-spin-button,
-    .counter__number-display::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    .counter__number-display {
-      -moz-appearance: textfield;
-    }
-    .counter__number-display:hover,
-    .counter__number-display:focus {
-      -moz-appearance: number-input;
-    }
-
-    .counter__number-display::-webkit-inner-spin-button,
-    .counter__number-display::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    .counter__plus {
-        position: relative;
-        font-size: 17px;
-        padding: 1px 0 0 0;
-        height: 24px;
-        width: 20px;
-        border: none;
-        background: #ffffff;
-        border: 1px solid #dcdcdc;
-        border-left-style: none;
-        border-radius: 0 6px 6px 0;
-        cursor: pointer;
-    }
-
-    .add-to-cart {
-        margin: 2px 0 0 0;
-        position: relative;
-        border: none;
-        background: none;
-        padding: 0;
-        cursor: pointer;
-        color: #005ac2;
-        text-decoration: underline;
-    }
-
-    .add-to-cart:hover {
-        color: #549ef1;
-    }
-
-        .add-to-cart::before {
-            background: url(../img/icons/cart__icon-cart_grey.png) no-repeat;
-            content: "";
-            display: block;
-            position: absolute;
-            height: 19px;
-            width: 20px;
-            left: -26px;
-            top: 1px;
-        }
 
     .product__description {
         font-size: 12px;
@@ -933,14 +693,18 @@ input {
 =====================================*/
 
 .category {
-    float: left;
-    padding: 3px 0 0 0;
-    font-size: 15px;
-    margin: 0 0 13px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+
 }
+
+    .category__inner {
+        float: left;
+        padding: 3px 0 0 0;
+        font-size: 15px;
+        margin: 0 0 13px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 
     .category__item-wrap {
         width: 220px;
@@ -989,7 +753,7 @@ input {
 =====================================*/
 
 .goods {
-    padding: 0 4px 0 3px;
+    padding: 0 4px 0 0;
 }
 
     .goods__price-sort {
@@ -1048,18 +812,17 @@ input {
     }
 
     .goods__item {
-        margin: 0 0 44px 0;
-        display: flex;
-        flex-direction: column;
+        margin: 0 0 73px 0;
     }
 
     .goods__image {
         width: 220px;
         height: 155px;
         background-size: cover;
-        margin: 0 0 6px 0;
+        margin: 0 0 10px 0;
         outline: 5px solid #797979;
         outline-offset: -5px;
+        display: block;
     }
 
     .goods__image_default {
@@ -1080,49 +843,50 @@ input {
     .goods__title {
         overflow: hidden;
         margin: 0 0 0 -1px;
+        display: inline;
+        position: relative;
     }
 
     .goods__price {
         color: #000000;
         font-size: 18px;
-        margin: 9px 0 11px -1px;
+        margin: 10px 0 11px -1px;
+        display: block;
     }
 
     .goods__price > .text-bold {
         font-size: 24px;
     }
 
-    .goods__item .add-to-cart {
-        position: relative;
-        margin: 0 0 0 26px;
-        font-size: 13px;
-    }
-
-        .goods__item .add-to-cart::before {
-            background: url(../img/icons/cart__icon-cart_grey.png) no-repeat;
-            content: "";
-            display: block;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            left: -26px;
-            top: -2px;
-        }
-
 .pages {
     font-size: 13px;
-    padding: 0 0 0 181px;
+    padding: 0 1px 0 0;
     margin: 0 0 64px 0;
     display: flex;
+    justify-content: center;
 }
 
     .pages__item {
         margin: 0 24px 0 0;
     }
 
+        .pages__item:last-child {
+            margin: 0;
+        }
+
     .pages__item > a {
         color: #000000;
     }
+
+.pages__next {
+    color: #000000;
+    cursor: default;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
     .pages__item_current > a {
         font-size: 14px;
@@ -1197,6 +961,10 @@ input {
     margin: 0 0 64px 0;
 }
 
+    .feedback__form {
+        margin: 20px 0 0 0;
+    }
+
     .feedback > form{
         font-size: 12px;
         color: #424242;
@@ -1219,7 +987,17 @@ input {
         color: #ff0000;
         padding: 5px 0 8px 13px;
         border: 1px solid #ffdcdc;
-        margin: 15px 0 20px 2px;
+        margin: 15px 0 0 2px;
+        line-height: 21px;
+    }
+
+    .feedback__server-succsess {
+        width: 433px;
+        background: #d3ffda;
+        color: #007d14;
+        padding: 5px 0 8px 13px;
+        border: 1px solid #68ff80;
+        margin: 15px 0 0 2px;
         line-height: 21px;
     }
 
@@ -1357,102 +1135,20 @@ input {
         margin: 0 0 18px 0;
     }
 
+    .content__main > ul {
+        list-style: disc;
+        margin: 0 0 18px 0;
+    }
+
+    .content__main > ul > li {
+        list-style: disc;
+        margin: 0 0 0 17px;
+    }
+
     .content__main > p {
         font-size: 13px;
         margin: 0 0 18px 0;
         line-height: 18px;
-    }
-
-/* LOGIN
-=====================================*/
-
-.login {
-
-}
-
-    .login__title {
-        color: #424242;
-        font-size: 18px;
-        margin: 0 0 45px 0;
-    }
-
-    .login__email {
-        padding: 0 0 0 2px;
-
-    }
-
-    .login__password {
-        padding: 0 0 0 67px;
-    }
-
-    .login__email, .login__password{
-        display: flex;
-        align-items: center;
-        margin: 0 0 37px 0;
-    }
-
-
-    .login__label {
-        font-size: 12px;
-        color: #424242;
-    }
-
-    .login__field {
-        border-radius: 8px;
-        border: 1px solid #c9c3b1;
-        width: 280px;
-        height: 29px;
-        padding: 0 0 1px 9px;
-        font-size: 13px;
-        margin: 0 0 0 10px;
-    }
-
-    .login__submit {
-        margin: 0 0 0 125px;
-        font-size: 13px;
-        border: none;
-        background: none;
-        color: #00b31d;
-        text-decoration: underline;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-/* REGISTRATION
-=====================================*/
-
-    .content__registration {
-        margin: 0 0 64px 0;
-    }
-
-.registration {
-    font-size: 13px;
-}
-
-    .registration > form{
-        font-size: 12px;
-        color: #424242;
-    }
-
-    .registration__title {
-        font-size: 17px;
-        font-weight: 600;
-        color: #424242;
-        margin: 0 0 2px 0;
-    }
-
-    .registration > .red-star {
-        margin: 0 0 0 2px;
-    }
-
-    .registration__server-errors {
-        width: 433px;
-        background: #fff1f1;
-        color: #ff0000;
-        padding: 5px 0 8px 13px;
-        border: 1px solid #ffdcdc;
-        margin: 15px 0 20px 2px;
-        line-height: 21px;
     }
 
 .form-ch {
@@ -1460,80 +1156,98 @@ input {
     flex-direction: column;
 }
 
-    .registration__field {
-        border-radius: 8px;
-        border: 1px solid #c9c3b1;
-        width: 280px;
-        height: 29px;
-        padding: 0 0 1px 9px;
-        font-size: 13px;
-        margin: 0 0 0 10px;
-    }
-
-    .registration__name {
-        padding: 0 0 0 109px;
-        position: relative;
-        order: -3;
-    }
-
-    .registration__email {
-        padding: 0 0 0 25px;
-        position: relative;
-        order: -2;
-    }
-
-    .registration__phone {
-        padding: 0 0 0 87px;
-        order: -1;
-    }
-
-    .registration__name .registration__label, .registration__email .registration__label, .registration__password .registration__label, .registration__password-check .registration__label {
-        position: relative;
-        margin: 0 8px 0 0;
-    }
-
-    .registration__phone .registration__label {
-        margin: 0 3px 0 0;
-    }
-
-    .registration__name,
-    .registration__email,
-    .registration__phone,
-    .registration__password,
-    .registration__password-check {
-        margin: 0 0 37px 0;
-        display: flex;
-        align-items: center;
-    }
-
-    .registration__password {
-        padding: 0 0 0 90px;
-        position: relative;
-    }
-
-    .registration__password-check {
-        position: relative;
-    }
-
-    .registration__submit {
-        width: 40px;
-        font-size: 13px;
-        border: none;
-        background: none;
-        color: #00b31d;
-        text-decoration: underline;
-        font-weight: 600;
-        cursor: pointer;
-        margin: 0 0 0 155px;
-    }
-
-    .registration .error {
-        left: 159px;
-    }
-
 .border-error {
     border: 1px solid #ff0000;
 }
+
+/* NEWS
+=====================================*/
+
+.news {
+
+}
+
+    .content__main > .news {
+        padding: 0;
+        width: auto;
+        max-width: none;
+    }
+
+    .content__main > .news > h2 {
+        margin: 0 0 26px 0;
+    }
+
+    .news__inner .news__item {
+        margin: 0 0 36px 2px;
+    }
+
+    .news__inner .news__title {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .news__inner .news__announ {
+        font-size: 13px;
+        color: #666666;
+        margin: 0 0 10px 0;
+        text-align: justify;
+    }
+
+    .news__inner .news__date {
+        font-size: 13px;
+        color: #666666;
+        text-align: right;
+    }
+
+        .news__inner .news__item:last-child {
+            margin: 0 0 50px 0;
+        }
+
+        .news__inner .news__item::after {
+            content: "";
+            height: 2px;
+            width: 100%;
+            background-color: #dddddd;
+            position: absolute;
+            bottom: -15px;
+            left: 0px;
+        }
+
+        .news__item:last-child::after {
+            content: none;
+        }
+
+/* ARTICLE
+=====================================*/
+
+.article {
+    text-align: justify;
+}
+
+    .article__date {
+        color: #666666;
+        font-size: 13px;
+    }
+
+    .article__title {
+        margin: 5px 0 20px 0;
+    }
+
+.error-404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20%;
+}
+
+    .error-404 > h1 {
+        font-size: 35px;
+        margin: 0 0 30px 0;
+    }
+
+    .error-404 > a {
+        font-size: 18px;
+    }
 
 /* MEDIA
 =====================================*/
@@ -1569,7 +1283,7 @@ input {
     }
 
     .header__pics {
-        margin: 15px 2px 0 0;
+        margin: 15px 2px 74px 0;
         background: #060606;
         border: 1px solid #818181;
         border-radius: 18px;
@@ -1643,38 +1357,6 @@ input {
         margin: 0px;
         padding: 0px;
         color: #ffffff;
-    }
-
-    .header__menu {
-        margin: 18px 1px 20px 0;
-    }
-
-    .header__menu-inner {
-        height: 36px;
-    }
-
-    .authorization__sign-in-pc {
-        display: none;
-    }
-
-    .authorization__sign-in-mob,
-    .authorization__sign-in-mob:link,
-    .authorization__sign-in-mob:visited,
-    .authorization__sign-in-mob:active {
-        display:inline;
-        margin: 0 22px 0 3px;
-    }
-
-    .authorization__login {
-        display: none;
-    }
-
-    .authorization__password {
-        display: none;
-    }
-
-    .header__cart {
-        right: 18px;
     }
 
     .header__navigation-wrap {
@@ -1848,7 +1530,7 @@ input {
     }
 
     .content__path {
-        margin: 1px 0 21px 2px;
+        margin: 1px 0 12px 2px;
     }
 
     .product {
@@ -1864,11 +1546,7 @@ input {
     .product__item {
         position: relative;
         flex-direction: column;
-        margin: 0 0 38px 0;
-    }
-
-    .product__actions {
-        margin: 15px 0 0 0;
+        margin: 0 0 93px 0;
     }
 
     .product__title {
@@ -1880,63 +1558,6 @@ input {
 
     .product-info {
         padding: 26px 0 0 1px;
-    }
-
-    .counter {
-        margin: 0 59px 0 1px;
-    }
-
-    .counter__number-display {
-        padding: 2px 0 0 1px;
-        font-size: 24px;
-        width: 60px;
-        height: 40px;
-    }
-
-    .counter__minus {
-        position: relative;
-        width: 34px;
-        height: 40px;
-        border-radius: 8px 0 0 8px;
-    }
-
-    .counter__minus::after {
-        content: "";
-        position: absolute;
-        background: #000000;
-        width: 16px;
-        height: 2px;
-        top: 18px;
-        left: 9px;
-    }
-
-    .counter__plus {
-        width: 33px;
-        height: 40px;
-        border-radius: 0 8px 8px 0;
-    }
-
-    .counter__plus::before {
-        width: 2px;
-        height: 16px;
-        top: 11px;
-        left: 15px;
-    }
-
-    .counter__plus::after {
-        width: 16px;
-        height: 2px;
-        top: 18px;
-        left: 8px;
-    }
-
-    .add-to-cart {
-        font-size: 15px;
-        margin: 0 0 1px 0;
-    }
-
-    .add-to-cart::before {
-        top: 10px;
     }
 
     .product__description {
@@ -1969,7 +1590,7 @@ input {
         margin: 0 0 10px;
     }
 
-    .category {
+    .category__inner {
         padding: 0px;
         margin: 30px 0 9px 0;
         float: none;
@@ -2054,7 +1675,6 @@ input {
     }
 
     .news__archive {
-        margin: 0 0 0 -3px;
         font-size: 15px;
     }
 
@@ -2066,7 +1686,7 @@ input {
     }
 
     .goods__price-sort {
-        margin: 11px 0 39px 0;
+        margin: 11px 0 39px 2px;
     }
 
     .price-sort__field {
@@ -2153,7 +1773,7 @@ input {
     .goods__image {
         width: 205px;
         height: 145px;
-        margin: 0 0 3px 0;
+        margin: 0 0 7px 0;
     }
 
     .goods__title {
@@ -2161,16 +1781,12 @@ input {
     }
 
     .goods__price {
-        margin: 9px 0 11px 1px;
+        margin: 34px 0 11px 1px;
     }
 
     .pages {
-        padding: 0 0 0 59px;
+        padding: 0 1px 0 0;
         margin: 0 0 72px 0;
-    }
-
-    .pages__item:nth-child(7) {
-        display: none;
     }
 
     .pages__item:last-child {
@@ -2223,13 +1839,17 @@ input {
 
     }
 
+    .feedback__form {
+        margin: 20px 0 0 0;
+    }
+
     .feedback__title {
         margin: 0 0 10px 0;
     }
 
     .feedback__server-errors {
         width: auto;
-        margin: 15px 0 20px 0;
+        margin: 15px 0 0 0;
     }
 
     .feedback__name, .feedback__email, .feedback__phone {
@@ -2294,134 +1914,57 @@ input {
         font-size: 15px;
     }
 
-    .content__main >  p, .content__main > ol {
+    .content__main >  p, .content__main > ol, .content__main > ul {
         font-size: 15px;
     }
 
-    /* LOGIN
+    /* NEWS
 =====================================*/
 
-    .login {
-        padding: 0;
+    .content__main > .news > h2 {
+        font-size: 18px;
+        margin: 0 0 26px 0;
     }
 
-    .login__email, .login__password {
-        align-items: baseline;
-        flex-direction: column;
-        padding: 0;
+    .news__inner .news__item {
+        margin: 0 0 31px 2px;
     }
 
-    .login__email {
-        margin: 0 0 14px 0;
+    .news__inner .news__title {
+        font-size: 15px;
+        font-weight: 400;
+        text-align: left;
     }
 
-    .login__password {
-        margin: 0 0 24px 0;
+    .news__inner .news__announ {
+        display: none;
     }
 
-    .login > form {
+    .news__inner .news__date {
         font-size: 13px;
+        text-align: left;
     }
 
-    .login__field {
-        margin: 0 0 0 3px;
-    }
-
-    .login__label {
-        margin: 0 0 5px 8px;
-        font-size: 13px;
-    }
-
-    .login__submit {
-        margin: 0 0 0 -5px;
-    }
-
-    .login__title {
-        font-size: 21px;
-        margin: 20px 0 22px 1px;
-    }
-
-    .content__login {
-        margin: 0 0 148px 0;
-    }
-
-    /* REGISTRATION
+    /* ARTICLE
 =====================================*/
 
-    .registration {
-        padding: 0;
+.article {
+    text-align: justify;
+    margin: 0 0 40px 0;
+}
 
+    .article p {
+        font-size: 15px;
     }
 
-    .registration__title {
-        font-size: 21px;
-        margin: 20px 0 8px 1px;
-    }
-
-    .registration__server-errors {
-        width: auto;
-        margin: 14px 0 25px -4px;
-        padding: 5px 0 8px 12px;
-        border: none;
-    }
-
-    .registration__name, .registration__email, .registration__phone, .registration__password, .registration__password-check {
-        align-items: baseline;
-        flex-direction: column;
-        padding: 0;
-        margin: 0 0 30px 3px;
-    }
-
-    .registration__name .registration__label, .registration__email .registration__label, .registration__password .registration__label, .registration__password-check .registration__label, .registration__phone .registration__label {
-        position: relative;
-        margin: 0 0 5px 6px;
-    }
-
-    .registration__email .registration__label {
-        margin: 0 0 5px 5px;
-    }
-
-    .registration__email {
-        margin: 0 0 31px 3px;
-    }
-
-    .registration__phone {
-        margin: 0 0 14px 3px;
-    }
-
-    .registration__password {
-        margin: 0 0 31px 3px;
-    }
-
-    .registration__password-check {
-        margin: 0 0 34px 3px;
-    }
-
-    .registration > form {
+    .article__date {
+        color: #666666;
         font-size: 13px;
     }
 
-    .registration__field {
-        margin: 0;
+    .article__title {
+        margin: 8px 0 20px 0;
+        font-size: 18px;
     }
 
-    .registration__label-wrap {
-        margin: 0 0 5px 0;
-    }
-
-    .registration__label {
-        margin: 0 0 5px 6px;
-    }
-
-    .registration__submit {
-        margin: 0 0 0 -4px;
-    }
-
-    .content__registration {
-        margin: 0 0 81px 0;
-    }
-
-    .registration .error {
-        left: 6px;
-    }
 }

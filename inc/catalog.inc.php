@@ -1,0 +1,142 @@
+<?php
+if (isset($_GET['prod_id'])) {
+    if ($product_id >= 1 and $product_id <= $count_products) {
+?>
+    <main class="content__main">
+        <div class="path content__path">
+            <ul class="path__inner">
+                <li class="path__past">
+                    <a href="index.php">Главная</a>
+                </li>
+                <li class="path__past">
+                    <a href="?id=1">Каталог</a>
+                </li>
+                <?php
+                if (isset($_GET['cat_id'])) {
+                ?>
+                <li class="path__past">
+                    <a href="?id=1&cat_id=<?= $cat_id = $_GET['cat_id']?>"><? $cat_id--; echo $categories_name[$cat_id]['name']?></a>
+                </li>
+                <?php
+                }
+                ?>
+                <li class="path__present">
+                    <?= $product['name']?>
+                </li>
+            </ul>
+        </div>
+        <div class="product">
+            <div class="product__item">
+                <img src="<?= $product['image']?>" alt="" class="product__image">
+                <div class="product-info">
+                    <h2 class="product__title"><?= $product['name']?></h2>
+                    <span class="product__price"><span class="text-bold"><?= number_format($product['price'])?></span> руб.</span>
+                </div>
+            </div>
+            <div class="product__description"><?= ($product['description'] != '' ? $product['description'] : 'Описание отсутствует.');?></div>
+        </div>
+    </main>
+<?php
+    } else
+        echo "Извините, такого товара не существует";
+} else {
+    $per_page = 12;
+    $price_from = (int) $_GET['from'];
+    $price_to = (int) $_GET['to'];
+    if ($price_from < 0) $price_from = 0;
+    if ($price_to < 0) $price_to = 0;
+    $count_products = get_count_products($cat_id, $price_from, $price_to);
+    $count_pages = ceil($count_products / $per_page);
+    if (!$count_pages) $count_pages = 1;
+    if (isset($_GET['page'])) {
+        $page = clear_int($_GET['page']);
+        if ($page < 1) $page = 1;
+    }
+    else
+        $page = 1;
+    if ($page > $count_pages) $page = $count_pages;
+    $start_pos = ($page - 1) * $per_page;
+    $products = select_products($cat_id, $start_pos, $per_page, $price_from, $price_to);
+    ?>
+    <main class="content__main">
+        <div class="path content__path">
+            <ul class="path__inner">
+                <li class="path__past">
+                    <a href="index.php">Главная</a>
+                </li>
+                <?php
+                if (isset($_GET['cat_id']) and $_GET['cat_id'] >= 1) {
+                ?>
+                <li class="path__past">
+                    <a href="?id=1">Каталог</a>
+                </li>
+                <li class="path__present">
+                    <? $cat_id--; echo $categories_name[$cat_id]['name']; $cat_id++;?>
+                </li>
+                <?php //echo $categories_name[$cat_id]['name'];
+                } else {
+                ?>
+                <li class="path__present">
+                    Каталог
+                </li>
+                <?php
+                }
+                ?>
+            </ul>
+        </div>
+        <div class="goods">
+            <div class="price-sort goods__price-sort">
+                <form action="index.php?id=<?= (isset($_GET['cat_id']) ? '1&cat_id=' . $cat_id : '1');?>" method="get">
+                    <span>Цена</span>
+                    <input type="hidden" name="id" value="1">
+                    <?php
+                    if ($cat_id)
+                        echo "<input type=\"hidden\" name=\"cat_id\" value=\"" . $cat_id . "\">";
+                    ?>
+                    <input type="text" name="from" class="price-sort__field" placeholder="от">
+                    <span>—</span>
+                    <input type="text" name="to" class="price-sort__field" placeholder="до">
+                    <div class="price-sort__apply-wrap">
+                        <button class="price-sort__apply" type="submit"><span>Применить</span></button>
+                    </div>
+                </form>
+            </div>
+            <ul class="goods__list">
+               <?php
+                foreach ($products as $item) {
+                ?>
+                <li class="goods__item-wrap">
+                    <div class="goods__item">
+                        <a href="<?= '?' . $_SERVER['QUERY_STRING'] . '&prod_id=' . $item['id']?>" class="goods__link">
+                            <img src="<?= $item['image']?>" alt="" class="goods__image">
+                            <span class="goods__title"><?= $item['name']?></span>
+                        </a>
+                        <span class="goods__price"><span class="text-bold"><?= number_format($item['price'])?></span> руб.</span>
+                    </div>
+                </li>
+                <?php
+                }
+                ?>
+                <li class="goods__item-wrap"></li>
+            </ul>
+        </div>
+    </main>
+    <ul class="pages">
+       <?php
+        for ($i = 1; $i <= $count_pages; $i++) {
+        ?>
+            <li class="pages__item <?= ($page == $i ? 'pages__item_current' : '');?>">
+                <a href="<?= clear_pagination_uri($i, $count_pages) . "page=$i";?>"><?= $i?></a>
+            </li>
+        <?php
+        }
+        ?>
+        <li class="pages__item">
+            <?= ($page != $count_pages ? "<a href=" . clear_pagination_uri($page++, $count_pages) . "page=$page>Следующая страница</a>" : "<span class=\"pages__next\">Следующая страница</span>");?>
+        </li>
+    </ul>
+<?php
+}
+
+
+

@@ -1,0 +1,4 @@
+Options +Indexes
+DirectoryIndex index.php
+AddDefaultCharset utf-8
+ErrorDocument 404 /err404.php
