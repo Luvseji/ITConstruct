@@ -1,4 +1,31 @@
 <?php
+require 'inc/functions.inc.php';
+require 'inc/config.inc.php';
+$header_start = true;
+$title = 'Каталог';
+$categories_name = select_categories_name();
+if (isset($_GET['prod_id'])) {
+    $count_products = get_count_products($cat_id, $price_from, $price_to);
+    $product_id = clear_int($_GET['prod_id']);
+    if ($product_id >= 1 and $product_id <= $count_products) {
+        $product = get_product($product_id);
+        $title = $product['name'];
+    } else
+        $title = 'Извините, такого товара не существует';
+} elseif (isset($_GET['cat_id'])) {
+    $cat_id = clear_int($_GET['cat_id']);
+    $count_categories = get_count_categories();
+    if ($cat_id and ($cat_id < 1 or $cat_id > $count_categories)) {
+        $cat_id = 1;
+    }
+    if ($cat_id >= 1 and $cat_id <= $count_categories) {
+        $cat_id--;
+        $title = $categories_name[$cat_id]['name'];
+        $cat_id++;
+    }
+}
+require 'inc/template.inc.php';
+
 if (isset($_GET['prod_id'])) {
     if ($product_id >= 1 and $product_id <= $count_products) {
 ?>
@@ -9,13 +36,13 @@ if (isset($_GET['prod_id'])) {
                     <a href="index.php">Главная</a>
                 </li>
                 <li class="path__past">
-                    <a href="?id=1">Каталог</a>
+                    <a href="catalog.php">Каталог</a>
                 </li>
                 <?php
                 if (isset($_GET['cat_id'])) {
                 ?>
                 <li class="path__past">
-                    <a href="?id=1&cat_id=<?= $cat_id = $_GET['cat_id']?>"><? $cat_id--; echo $categories_name[$cat_id]['name']?></a>
+                    <a href="catalog.php?cat_id=<?= $cat_id = $_GET['cat_id']?>"><? $cat_id--; echo $categories_name[$cat_id]['name']?></a>
                 </li>
                 <?php
                 }
@@ -65,15 +92,15 @@ if (isset($_GET['prod_id'])) {
                     <a href="index.php">Главная</a>
                 </li>
                 <?php
-                if (isset($_GET['cat_id']) and $_GET['cat_id'] >= 1) {
+                if ($cat_id >= 1) {
                 ?>
                 <li class="path__past">
-                    <a href="?id=1">Каталог</a>
+                    <a href="catalog.php">Каталог</a>
                 </li>
                 <li class="path__present">
                     <? $cat_id--; echo $categories_name[$cat_id]['name']; $cat_id++;?>
                 </li>
-                <?php //echo $categories_name[$cat_id]['name'];
+                <?php
                 } else {
                 ?>
                 <li class="path__present">
@@ -86,9 +113,8 @@ if (isset($_GET['prod_id'])) {
         </div>
         <div class="goods">
             <div class="price-sort goods__price-sort">
-                <form action="index.php?id=<?= (isset($_GET['cat_id']) ? '1&cat_id=' . $cat_id : '1');?>" method="get">
+                <form action="catalog.php" method="get">
                     <span>Цена</span>
-                    <input type="hidden" name="id" value="1">
                     <?php
                     if ($cat_id)
                         echo "<input type=\"hidden\" name=\"cat_id\" value=\"" . $cat_id . "\">";
@@ -137,6 +163,8 @@ if (isset($_GET['prod_id'])) {
     </ul>
 <?php
 }
+$header_end = true;
+require 'inc/template.inc.php';
 
 
 

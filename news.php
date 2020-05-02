@@ -1,4 +1,19 @@
 <?php
+require 'inc/functions.inc.php';
+require 'inc/config.inc.php';
+$header_start = true;
+$title = 'Новости';
+if (isset($_GET['news_id'])) {
+    $count_news = get_count_news();
+    $news_id = clear_int($_GET['news_id']);
+    if ($news_id >= 1 and $news_id <= $count_news) {
+        $article = get_article($news_id);
+        $title = $article['title'];
+    } else
+       $title = 'Извините, такой статьи не существует';
+}
+require 'inc/template.inc.php';
+
 if (isset($_GET['news_id'])) {
     if ($news_id >= 1 and $news_id <= $count_news) {
 ?>
@@ -9,7 +24,7 @@ if (isset($_GET['news_id'])) {
                 <a href="index.php">Главная</a>
             </li>
             <li class="path__past">
-                <a href="?id=3">Новости</a>
+                <a href="news.php">Новости</a>
             </li>
             <li class="path__present">
                 <?= $article['title']?>
@@ -58,7 +73,7 @@ if (isset($_GET['news_id'])) {
                 foreach ($news as $item) {
                 ?>
             <li class="news__item">
-                <a href="?id=3&news_id=<?= $item['id']?>" class="news__link">
+                <a href="news.php?news_id=<?= $item['id']?>" class="news__link">
                     <span class="news__title"><?= $item['title']?></span>
                 </a>
                 <span class="news__announ"><?= $item['announcement']?></span>
@@ -85,4 +100,6 @@ if (isset($_GET['news_id'])) {
     </li>
 </ul>
 <?php
-    }
+}
+$header_end = true;
+require 'inc/template.inc.php';

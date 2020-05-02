@@ -1,3 +1,11 @@
+<?php
+require 'inc/functions.inc.php';
+require 'inc/config.inc.php';
+$header_start = true;
+session_start();
+$title = 'Контакты';
+require 'inc/template.inc.php';
+?>
 <main class="content__main">
     <section class="contacts content__contacts">
         <h2>Контакты</h2>
@@ -74,7 +82,7 @@
                 echo "<div class=\"feedback__server-errors\">\nВаше сообщение уже было отправлено\n</div>\n";
         }
         ?>
-        <form action="?id=5" method="post" class="feedback__form" id="feedback__form">
+        <form action="contacts.php" method="post" class="feedback__form" id="feedback__form">
             <div class="feedback__name">
                 <label for="name-field" class="feedback__label feedback__label_required">Имя</label>
                 <input type="text" class="feedback__field field-empty-check" id="name-field" name="name">
@@ -98,3 +106,6 @@
         </form>
     </div>
 </main>
+<?php
+$header_end = true;
+require 'inc/template.inc.php';
