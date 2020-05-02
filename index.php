@@ -1,9 +1,8 @@
 <?php
 require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
-$header_start = true;
 $title = 'Главная';
-require 'inc/template.inc.php';
+require 'inc/temp_head.inc.php';
 $categories = select_categories();
 $side_bar = true;
 ?>
@@ -71,5 +70,4 @@ $side_bar = true;
     </div>
 </section>
 <?php
-$header_end = true;
-require 'inc/template.inc.php';
+require 'inc/temp_foot.inc.php';

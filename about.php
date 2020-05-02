@@ -1,9 +1,8 @@
 <?php
 require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
-$header_start = true;
 $title = 'О компании';
-require 'inc/template.inc.php';
+require 'inc/temp_head.inc.php';
 ?>
 <main class="content__main">
     <h2>О компании</h2>
@@ -21,5 +20,4 @@ require 'inc/template.inc.php';
     <p>Среди клиентов компании – крупнейшие представители сетевого ритейла, региональные лидеры food- и non-food розницы, ведущие сети общественного питания, большая тройка телекоммуникационных операторов, лидеры аптечного рынка и многие другие.</p>
 </main>
 <?php
-$header_end = true;
-require 'inc/template.inc.php';
+require 'inc/temp_foot.inc.php';

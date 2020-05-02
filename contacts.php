@@ -1,10 +1,9 @@
 <?php
 require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
-$header_start = true;
 session_start();
 $title = 'Контакты';
-require 'inc/template.inc.php';
+require 'inc/temp_head.inc.php';
 ?>
 <main class="content__main">
     <section class="contacts content__contacts">
@@ -107,5 +106,4 @@ require 'inc/template.inc.php';
     </div>
 </main>
 <?php
-$header_end = true;
-require 'inc/template.inc.php';
+require 'inc/temp_foot.inc.php';

@@ -1,7 +1,6 @@
 <?php
 require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
-$header_start = true;
 $title = 'Каталог';
 $categories_name = select_categories_name();
 if (isset($_GET['prod_id'])) {
@@ -24,8 +23,7 @@ if (isset($_GET['prod_id'])) {
         $cat_id++;
     }
 }
-require 'inc/template.inc.php';
-
+require 'inc/temp_head.inc.php';
 if (isset($_GET['prod_id'])) {
     if ($product_id >= 1 and $product_id <= $count_products) {
 ?>
@@ -163,8 +161,7 @@ if (isset($_GET['prod_id'])) {
     </ul>
 <?php
 }
-$header_end = true;
-require 'inc/template.inc.php';
+require 'inc/temp_foot.inc.php';
 
 
 

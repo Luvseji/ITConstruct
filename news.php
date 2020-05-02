@@ -1,7 +1,6 @@
 <?php
 require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
-$header_start = true;
 $title = 'Новости';
 if (isset($_GET['news_id'])) {
     $count_news = get_count_news();
@@ -12,7 +11,7 @@ if (isset($_GET['news_id'])) {
     } else
        $title = 'Извините, такой статьи не существует';
 }
-require 'inc/template.inc.php';
+require 'inc/temp_head.inc.php';
 
 if (isset($_GET['news_id'])) {
     if ($news_id >= 1 and $news_id <= $count_news) {
@@ -101,5 +100,4 @@ if (isset($_GET['news_id'])) {
 </ul>
 <?php
 }
-$header_end = true;
-require 'inc/template.inc.php';
+require 'inc/temp_foot.inc.php';

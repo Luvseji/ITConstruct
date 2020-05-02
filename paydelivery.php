@@ -1,9 +1,8 @@
 <?php
 require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
-$header_start = true;
 $title = 'Доставка и оплата';
-require 'inc/template.inc.php';
+require 'inc/temp_head.inc.php';
 ?>
 <main class="content__main">
     <h2>Доставка</h2>
@@ -23,5 +22,4 @@ require 'inc/template.inc.php';
     <p><i>Также, Вы имеете возможность приобрести товары в нашем шоу-руме на м.Сходненская</i></p>
 </main>
 <?php
-$header_end = true;
-require 'inc/template.inc.php';
+require 'inc/temp_foot.inc.php';
