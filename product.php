@@ -27,7 +27,7 @@ if (isset($_GET['prod_id'])) {
                 if (isset($_GET['cat_id'])) {
                 ?>
                 <li class="path__past">
-                    <a href="catalog.php?cat_id=<?= $cat_id = $_GET['cat_id']?>"><? $cat_id--; echo $categories_name[$cat_id]['name']?></a>
+                    <a href="catalog.php?cat_id=<? $cat_id = $_GET['cat_id']; echo $cat_id--;?>"><?= $categories_name[$cat_id]['name']; $cat_id++;?></a>
                 </li>
                 <?php
                 }
