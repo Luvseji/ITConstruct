@@ -1,12 +1,11 @@
 <?php
-require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
+require 'inc/functions.inc.php';
 $title = 'Главная';
 require 'inc/temp_head.inc.php';
 $categories = select_categories();
 $side_bar = true;
 ?>
-<main class="content__main">
     <div class="category">
         <ul class="category__inner">
            <?php
@@ -49,7 +48,7 @@ $side_bar = true;
         foreach ($news_name as $item) {
         ?>
         <li class="news__item">
-            <a href="news.php?news_id=<?= $item['id']?>" class="news__link">
+            <a href="article.php?news_id=<?= $item['id']?>" class="news__link">
                 <span class="news__title"><?= $item['title']?></span>
             </a>
             <time class="news__date" datetime="<?= $item['date']?>"><?= $item['date']?></time>

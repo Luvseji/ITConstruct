@@ -159,34 +159,11 @@ function save_form($name, $email, $phone, $details) {
     return true;
 }
 function send_email($name, $email, $phone, $details) {
+    global $mail;
     if ($phone == 0)
         $message = "Имя: $name<br>Почта: $email<br> Текст: $details";
     else
         $message = "Имя: $name<br>Почта: $email<br>Телефон: $phone<br> Текст: $details";
-    require 'phpmailer/PHPMailer.php';
-    require 'phpmailer/SMTP.php';
-    require 'phpmailer/Exception.php';
-
-    $mail = new PHPMailer\PHPMailer\PHPMailer();
-    try {
-        $mail->isSMTP();
-        $mail->CharSet = "UTF-8";
-        $mail->SMTPAuth   = true;
-
-        // Настройки вашей почты
-        $mail->Host       = 'smtp.gmail.com'; // SMTP сервера GMAIL
-        $mail->Username   = 'user.test.itconstruct'; // Логин на почте
-        $mail->Password   = '1231231123'; // Пароль на почте
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port       = 465;
-        $mail->setFrom('user.test.itconstruct@gmail.com', 'Автоматическая рассылка'); // Адрес самой почты и имя отправителя
-        $mail->addAddress('user.test.itconstruct@gmail.com');
-        $mail->isHTML(true);
-        $mail->Subject = 'Письмо с сайта "itconstruct"';
         $mail->Body    = $message;
         $mail->send();
-
-    } catch (Exception $e) {
-        echo '';
-    }
 }

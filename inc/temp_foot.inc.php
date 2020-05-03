@@ -1,4 +1,4 @@
-</div>
+    </div>
         <?php if (!$side_bar): ?>
         <div class="side-bar">
             <section class="category-list content__category-list">
@@ -22,7 +22,7 @@
                     foreach ($news_name as $item) {
                     ?>
                     <li class="news__item">
-                        <a href="news.php?news_id=<?= $item['id']?>" class="news__link">
+                        <a href="article.php?news_id=<?= $item['id']?>" class="news__link">
                             <span class="news__title"><?= $item['title']?></span>
                         </a>
                         <time class="news__date" datetime="<?= $item['date']?>"><?= $item['date']?></time>

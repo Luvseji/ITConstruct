@@ -16,7 +16,7 @@ $news_name = select_news_name();
     <header class="header">
         <div class="container">
             <div class="header__pics">
-                <?=(($_SERVER['REQUEST_URI'] == '/' or $_SERVER['REQUEST_URI'] == '/index.php') ? '<div class=\'logo\'></div>' : '<a href="index.php" class=\'logo\'></a>');?>
+                <?=($_SERVER['SCRIPT_NAME'] == '/index.php' ? '<div class=\'logo\'></div>' : '<a href="index.php" class=\'logo\'></a>');?>
                 <div class="header__preview">
                     <div class="header__title">
                         Нанотехнологии здоровья
@@ -76,4 +76,5 @@ $news_name = select_news_name();
     <div class="content">
         <div class="container">
             <div class="content__inner">
+                <main class="content__main">
 

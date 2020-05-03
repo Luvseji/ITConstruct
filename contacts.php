@@ -1,11 +1,10 @@
 <?php
-require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
+require 'inc/functions.inc.php';
 session_start();
 $title = 'Контакты';
 require 'inc/temp_head.inc.php';
 ?>
-<main class="content__main">
     <section class="contacts content__contacts">
         <h2>Контакты</h2>
         <div class="contacts__inner">

@@ -1,10 +1,9 @@
 <?php
-require 'inc/functions.inc.php';
 require 'inc/config.inc.php';
+require 'inc/functions.inc.php';
 $title = 'Доставка и оплата';
 require 'inc/temp_head.inc.php';
 ?>
-<main class="content__main">
     <h2>Доставка</h2>
     <h3>Уважаемые покупатели!</h3>
     <p>Оплатить свой заказ Вы можете любым из следующих способов:</p>
