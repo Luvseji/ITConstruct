@@ -16,7 +16,7 @@ $news_name = select_news_name();
     <header class="header">
         <div class="container">
             <div class="header__pics">
-                <?=($_SERVER['SCRIPT_NAME'] == '/index.php' ? '<div class=\'logo\'></div>' : '<a href="index.php" class=\'logo\'></a>');?>
+                <?= ($_SERVER['SCRIPT_NAME'] == '/index.php' ? '<div class=\'logo\'></div>' : '<a href="index.php" class=\'logo\'></a>'); ?>
                 <div class="header__preview">
                     <div class="header__title">
                         Нанотехнологии здоровья
@@ -42,15 +42,11 @@ $news_name = select_news_name();
                         <li class="navigation__item navigation__item-mob sub-navigation">
                             <a href="#" class="navigation__link sub-navigation__link navigation__link-catalog">Каталог</a>
                             <ul class="catalog sub-navigation__inner">
-                                <?php
-                                    foreach ($categories_name as $item) {
-                                    ?>
+                                <?php foreach ($categories_name as $item): ?>
                                 <li class="catalog__item">
                                     <a href="catalog.php?cat_id=<?= $item['id']?>" class="catalog__link"><?= $item['name']?></a>
                                 </li>
-                                <?php
-                                    }
-                                    ?>
+                                <?php endforeach; ?>
                             </ul>
                         </li>
                         <li class="navigation__item navigation__item-pc">
@@ -77,4 +73,3 @@ $news_name = select_news_name();
         <div class="container">
             <div class="content__inner">
                 <main class="content__main">
-
