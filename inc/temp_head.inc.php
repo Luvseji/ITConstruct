@@ -1,5 +1,9 @@
-<?php
-$categories_name = select_categories_name();
+<?
+if ($_SERVER['SCRIPT_NAME'] == '/index.php') {
+    $categories = select_categories();
+} else {
+    $categories = select_categories_name();
+}
 $news_name = select_news_name();
 ?>
 <!DOCTYPE html>
@@ -8,6 +12,7 @@ $news_name = select_news_name();
     <meta charset="UTF-8">
     <link href="http://allfont.ru/allfont.css?fonts=arial-narrow" rel="stylesheet" type="text/css" />
     <link href="css/basic.css" rel="stylesheet" type="text/css">
+    <?= ($cat_id && $product_id && check_main_category($cat_id, $product_id) == true ? "<link rel=\"canonical\" href=\"" . $_SERVER['REQUEST_URI'] . "\"/>\n" : ''); ?>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
     <title><?=$title;?></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -42,11 +47,11 @@ $news_name = select_news_name();
                         <li class="navigation__item navigation__item-mob sub-navigation">
                             <a href="#" class="navigation__link sub-navigation__link navigation__link-catalog">Каталог</a>
                             <ul class="catalog sub-navigation__inner">
-                                <?php foreach ($categories_name as $item): ?>
+                                <? foreach ($categories as $item): ?>
                                 <li class="catalog__item">
                                     <a href="catalog.php?cat_id=<?= $item['id']?>" class="catalog__link"><?= $item['name']?></a>
                                 </li>
-                                <?php endforeach; ?>
+                                <? endforeach; ?>
                             </ul>
                         </li>
                         <li class="navigation__item navigation__item-pc">

@@ -859,12 +859,16 @@ pre {
     }
 
 .pages {
-    font-size: 13px;
-    padding: 0 1px 0 0;
-    margin: 0 0 64px 0;
-    display: flex;
-    justify-content: center;
+
 }
+
+    .pages__inner {
+        font-size: 13px;
+        padding: 0 1px 0 0;
+        margin: 0 0 64px 0;
+        display: flex;
+        justify-content: center;
+    }
 
     .pages__item {
         margin: 0 24px 0 0;
@@ -878,15 +882,15 @@ pre {
         color: #000000;
     }
 
-.pages__next {
-    color: #000000;
-    cursor: default;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+    .pages__next {
+        color: #000000;
+        cursor: default;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
     .pages__item_current > a {
         font-size: 14px;
