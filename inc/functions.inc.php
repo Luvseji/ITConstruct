@@ -148,7 +148,7 @@ function send_email(...$elements) {
 }
 function check_main_category($cat_id, $product_id) {
     global $link;
-    $sql = "SELECT COUNT(*) FROM product_main_category_is WHERE category_id=$cat_id AND product_id=$product_id";
+    $sql = "SELECT COUNT(*) FROM product WHERE category_main_id=$cat_id AND id=$product_id";
     if (!$result = mysqli_query($link, $sql)) {
         return false;
     }

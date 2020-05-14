@@ -20,7 +20,7 @@ if (isset($_GET['prod_id'])) {
 if (isset($_GET['cat_id'])) {
     $cat_id = (int) $_GET['cat_id'];
 } else {
-    $sql = "SELECT category_id FROM product_main_category_is WHERE product_id=$product_id";
+    $sql = "SELECT category_main_id FROM product WHERE id=$product_id";
     if (!$result = mysqli_query($link, $sql)) {
         return false;
     }
