@@ -1,18 +1,29 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 if (isset($_GET['news_id'])) {
-    $count_news = get_count_news();
     $news_id = (int) $_GET['news_id'];
-    if ($news_id >= 1 && $news_id <= $count_news) {
+    $sql = "SELECT COUNT(*) FROM news WHERE id=$news_id";
+    if (!$result = mysqli_query($link, $sql)) {
+        header('Location: err404.php');
+    }
+    $is_article = mysqli_fetch_row($result);
+    mysqli_free_result($result);
+    if ($is_article[0] != 0) {
         $article = get_article($news_id);
         $title = $article['title'];
-    } else
+    } else {
        $title = 'Извините, такой статьи не существует';
+    }
 }
+ob_start();
 require 'inc/temp_head.inc.php';
-if (isset($_GET['news_id'])) {
-    if ($news_id >= 1 && $news_id <= $count_news) { ?>
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
+echo $buffer;
+if ($is_article[0] != 0) : ?>
 <div class="path content__path">
     <ul class="path__inner">
         <li class="path__past">
@@ -33,7 +44,7 @@ if (isset($_GET['news_id'])) {
     <div class="article__description"><?= $article['description']?></div>
 </section>
 <?
-    } else
-        echo "Извините, такой статьи не существует\n";
-}
+else :
+    echo "Извините, такой статьи не существует\n";
+endif;
 require 'inc/temp_foot.inc.php';

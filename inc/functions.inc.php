@@ -54,26 +54,6 @@ function get_product($prod_id) {
     mysqli_free_result($result);
     return $product[0];
 }
-function get_count_news() {
-    global $link;
-    $sql = "SELECT COUNT(*) FROM news";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $count = mysqli_fetch_row($result);
-    mysqli_free_result($result);
-    return $count[0];
-}
-function get_count_categories() {
-    global $link;
-    $sql = "SELECT COUNT(*) FROM category";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $count = mysqli_fetch_row($result);
-    mysqli_free_result($result);
-    return $count[0];
-}
 function select_news($start_pose, $per_page) {
     global $link;
     $sql = "SELECT id, title, date, announcement FROM news ORDER BY date DESC LIMIT $start_pose, $per_page";
@@ -102,24 +82,19 @@ function check_empty($item) {
         return true;
     }
 }
-function save_form(...$elements) {
+function save_form($name, $email, $phone, $details) {
     global $link;
-    $sql = "INSERT INTO feedback (name, email, " . (count($elements) == 4 ? "phone, " : '') . "description) VALUES (?, ?, " . (count($elements) == 4 ? "?, " : '') . "?)";
+    $sql = "INSERT INTO feedback (name, email, phone, description) VALUES (?, ?, ?, ?)";
     if (!$stmt = mysqli_prepare($link, $sql)) {
         return false;
     }
-    if (count($elements) == 4) {
-        mysqli_stmt_bind_param($stmt, "ssis", $elements[0], $elements[1], $elements[2], $elements[3]);
-    }
-    else {
-        mysqli_stmt_bind_param($stmt, "sss", $elements[0], $elements[1], $elements[2]);
-    }
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $phone, $details);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
 }
-function send_email(...$elements) {
-    $message = "Имя: $elements[0]<br>Почта: $elements[1]<br>" . (count($elements) == 4 ? "Телефон: $elements[2]<br>Текст: $elements[3]" : "Текст: $elements[2]");
+function send_email($name, $email, $phone, $details) {
+    $message = "Имя: $name<br>Почта: $email<br>Телефон: $phone<br>Текст: $details";
     require 'phpmailer/PHPMailer.php';
     require 'phpmailer/SMTP.php';
     require 'phpmailer/Exception.php';
@@ -157,4 +132,31 @@ function check_main_category($cat_id, $product_id) {
     if ($main_cat[0][0] == 0) {
         return true;
     }
+}
+function get_page_info($sql_count, $query_page) {
+    global $link;
+    if (!$result = mysqli_query($link, $sql_count)) {
+        return false;
+    }
+    $count = mysqli_fetch_row($result);
+    mysqli_free_result($result);
+    $count_products = $count[0];
+    $count_pages = ceil($count_products / PER_PAGE);
+    if (!$count_pages) {
+        $count_pages = 1;
+    }
+    if ($query_page < 1) {
+        $query_page = 1;
+    }
+    elseif ($query_page > $count_pages) {
+        $query_page = $count_pages;
+    }
+    $page = $query_page;
+    $start_pos = ($page - 1) * PER_PAGE;
+    $page_info = [
+        'count_pages' => $count_pages,
+        'page' => $page,
+        'start_pos' => $start_pos
+    ];
+    return $page_info;
 }

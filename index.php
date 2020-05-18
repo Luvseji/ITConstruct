@@ -1,8 +1,13 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
-$title = 'Главная';
+ob_start();
 require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'Главная' . '$3', $buffer);
+echo $buffer;
 ?>
 <div class="category">
     <ul class="category__inner">

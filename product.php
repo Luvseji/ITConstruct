@@ -1,7 +1,7 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
-$categories_name = select_categories_name();
 if (isset($_GET['prod_id'])) {
     $product_id = (int) $_GET['prod_id'];
     $sql = "SELECT COUNT(*) FROM product WHERE id=$product_id";
@@ -17,18 +17,20 @@ if (isset($_GET['prod_id'])) {
         $title = 'Извините, такого товара не существует';
     }
 }
+ob_start();
+require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
 if (isset($_GET['cat_id'])) {
     $cat_id = (int) $_GET['cat_id'];
-} else {
-    $sql = "SELECT category_main_id FROM product WHERE id=$product_id";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
+    if ($cat_id != $product['category_main_id']) {
+        $buffer = preg_replace('/(<\/title>)(.*?)/i', '$1' . "\n\t<link rel=\"canonical\" href=\"" . $_SERVER['REQUEST_URI'] . "\"/>", $buffer);
     }
-    $main_category = mysqli_fetch_all($result);
-    mysqli_free_result($result);
-    $main_category = $main_category[0][0];
+} else {
+    $main_category = $product['category_main_id'];
 }
-require 'inc/temp_head.inc.php';
+echo $buffer;
 if (isset($_GET['prod_id'])) {
     if ($is_product[0] != 0) { ?>
 <div class="path content__path">
@@ -39,15 +41,13 @@ if (isset($_GET['prod_id'])) {
         <li class="path__past">
             <a href="catalog.php">Каталог</a>
         </li>
+        <li class="path__past">
         <? if ($cat_id): ?>
-        <li class="path__past">
-            <a href="catalog.php?cat_id=<?= $cat_id--;?>"><?= $categories_name[$cat_id]['name']; $cat_id++;?></a>
-        </li>
+            <a href="catalog.php?cat_id=<?= $cat_id--; ?>"><?= $categories[$cat_id++]['name']; ?></a>
         <? else : ?>
-        <li class="path__past">
-            <a href="catalog.php?cat_id=<?= $main_category-- ?>"><?= $categories_name[$main_category]['name'] ?></a>
-        </li>
+            <a href="catalog.php?cat_id=<?= $main_category--; ?>"><?= $categories[$main_category]['name']; ?></a>
         <? endif; ?>
+        </li>
         <li class="path__present">
             <?= $product['name']?>
         </li>

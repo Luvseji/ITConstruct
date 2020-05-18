@@ -12,9 +12,8 @@ $news_name = select_news_name();
     <meta charset="UTF-8">
     <link href="http://allfont.ru/allfont.css?fonts=arial-narrow" rel="stylesheet" type="text/css" />
     <link href="css/basic.css" rel="stylesheet" type="text/css">
-    <?= ($cat_id && $product_id && check_main_category($cat_id, $product_id) == true ? "<link rel=\"canonical\" href=\"" . $_SERVER['REQUEST_URI'] . "\"/>\n" : ''); ?>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-    <title><?=$title;?></title>
+    <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>

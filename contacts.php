@@ -1,9 +1,14 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 session_start();
-$title = 'Контакты';
+ob_start();
 require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'Контакты' . '$3', $buffer);
+echo $buffer;
 ?>
 <section class="contacts content__contacts">
     <h2>Контакты</h2>
@@ -37,63 +42,46 @@ require 'inc/temp_head.inc.php';
     <h2 class="feedback__title">Форма обратной связи</h2>
     <span class="red-star">*</span> — обязательные для заполнения поля
     <?
-    $form_sent = false;
-    if (isset($_SESSION['sent'])) : ?>
+    if (isset($_SESSION['sent'])) { ?>
         <div class="feedback__server-succsess">Ваше сообщение уже было отправлено</div> <?
-        $form_sent = true;
-        endif;
-    if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['details'])) {
-        if (!isset($_SESSION['sent'])) {
+    } else {
+        if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['details'])) {
             $name = clear_str($_POST['name']);
             $email = clear_str($_POST['email']);
             $details = clear_str($_POST['details']);
-            if (check_empty($name) == false) { ?>
-                <div class="feedback__server-errors">Поле «Имя» должно быть заполнено<br> <?
-                $error = true;
+            $phone = clear_str($_POST['phone']);
+            if (check_empty($name) == false) {
+                $error_name = 'Поле «Имя» должно быть заполнено<br>';
             }
             if (check_empty($email) == false) {
-                if (!isset($error)) { ?>
-                    <div class="feedback__server-errors">Поле «Электронная почта» должно быть заполнено<br> <?
-                    $error = true;
-                } else { ?>
-                   Поле «Электронная почта» должно быть заполнено<br> <?
-                }
+                $error_email = 'Поле «Электронная почта» должно быть заполнено<br>';
             }
             if (check_empty($details) == false) {
-                if (!isset($error)) { ?>
-                    <div class="feedback__server-errors">Поле с описанием должно быть заполнено<br> <?
-                    $error = true;
-                } else { ?>
-                    Поле с описанием должно быть заполнено<br> <?
-                }
+                $error_details = 'Поле с описанием должно быть заполнено<br>';
             }
-            if ($error == true) { ?>
+            if ($error_name || $error_email || $error_details) { ?>
+                <div class="feedback__server-errors">
+                <?
+                if ($error_name) {
+                    echo $error_name;
+                }
+                if ($error_email) {
+                    echo $error_email;
+                }
+                if ($error_details) {
+                    echo $error_details;
+                }?>
                 </div> <?
             }
-            if (!isset($error)) {
-                if (isset($_POST['phone']) && check_empty($_POST['phone']) == true) {
-                    $phone = (int) $_POST['phone'];
-                    $is_phone = true;
-                }
-                if ($is_phone) {
-                    if (!save_form($name, $email, $phone, $details) || !send_email($name, $email, $phone, $details)) { ?>
-                        <div class="feedback__server-errors">В отправке вашего сообщения произошла ошибка</div> <?
-                    } else { ?>
-                        <div class="feedback__server-succsess">Благодарим за ваше письмо. Мы свяжемся с вами в ближайшее время</div> <?
-                        $_SESSION['sent'] = 'true';
-                    }
-                } else {
-                    if (!save_form($name, $email, $details) || !send_email($name, $email, $details)) { ?>
-                        <div class="feedback__server-errors">В отправке вашего сообщения произошла ошибка</div> <?
-                    } else { ?>
-                        <div class="feedback__server-succsess">Благодарим за ваше письмо. Мы свяжемся с вами в ближайшее время</div> <?
-                        $_SESSION['sent'] = 'true';
-                    }
+            if (!$error_name && !$error_email && !$error_details) {
+                if (!save_form($name, $email, $phone, $details) || !send_email($name, $email, $phone, $details)) { ?>
+                    <div class="feedback__server-errors">В отправке вашего сообщения произошла ошибка</div> <?
+                } else { ?>
+                    <div class="feedback__server-succsess">Благодарим за ваше письмо. Мы свяжемся с вами в ближайшее время</div> <?
+                    $_SESSION['sent'] = 'true';
                 }
             }
-        }
-    }
-    if ($form_sent != true) : ?>
+        } ?>
     <form action="contacts.php" method="post" class="feedback__form" id="feedback__form">
         <div class="feedback__name">
             <label for="name-field" class="feedback__label feedback__label_required">Имя</label>
@@ -116,7 +104,7 @@ require 'inc/temp_head.inc.php';
             <button class="feedback__reset" type="reset">Очистить поля</button>
         </div>
     </form>
-    <? endif; ?>
+    <? } ?>
 </div>
 <?
 require 'inc/temp_foot.inc.php';

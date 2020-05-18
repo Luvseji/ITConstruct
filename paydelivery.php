@@ -1,8 +1,13 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
-$title = 'Доставка и оплата';
+ob_start();
 require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'Доставка и оплата' . '$3', $buffer);
+echo $buffer;
 ?>
 <h2>Доставка</h2>
 <h3>Уважаемые покупатели!</h3>

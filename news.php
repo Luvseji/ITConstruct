@@ -1,27 +1,17 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
-$title = 'Новости';
-$count_news = get_count_news();
-$count_pages = ceil($count_news / PER_PAGE);
-if (!$count_pages) {
-    $count_pages = 1;
-}
-if (isset($_GET['page'])) {
-    $page = (int) $_GET['page'];
-    if ($page < 1) {
-        $page = 1;
-    }
-}
-else {
-    $page = 1;
-}
-if ($page > $count_pages) {
-    $page = $count_pages;
-}
-$start_pos = ($page - 1) * PER_PAGE;
-$news = select_news($start_pos, PER_PAGE);
+$sql = "SELECT COUNT(*) FROM news";
+$query_page = (int) $_GET['page'];
+$page_info = get_page_info($sql, $query_page);
+$news = select_news($page_info['start_pos'], PER_PAGE);
+ob_start();
 require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'Новости' . '$3', $buffer);
+echo $buffer;
 ?>
 <div class="path content__path">
     <ul class="path__inner">
@@ -46,22 +36,18 @@ require 'inc/temp_head.inc.php';
         <? endforeach; ?>
     </ul>
 </div>
-<?
-$page_prev = $page - 1;
-$page_next = $page + 1;
-?>
 <div class="pages">
     <ul class="pages__inner">
         <li class="pages__item">
-            <?= ($page != 1 ? "<a href=\"" . clear_pagination_uri($page, $count_pages) . "page=" . $page_prev . "\">Предыдущая страница</a>" : "<span class=\"pages__next\">Предыдущая страница</span>");?>
+            <?= ($page_info['page'] != 1 ? "<a href=\"" . clear_pagination_uri($page, $page_info['count_pages']) . "page=" . ($page_info['page'] - 1) . "\">Предыдущая страница</a>" : "<span class=\"pages__next\">Предыдущая страница</span>");?>
         </li>
-        <? for ($i = 1; $i <= $count_pages; $i++): ?>
-        <li class="pages__item <?= ($page == $i ? 'pages__item_current' : '');?>">
-            <a href="<?= clear_pagination_uri($i, $count_pages) . "page=$i";?>"><?= $i?></a>
+        <? for ($i = 1; $i <= $page_info['count_pages']; $i++) : ?>
+        <li class="pages__item <?= ($page_info['page'] == $i ? 'pages__item_current' : '');?>">
+            <a href="<?= clear_pagination_uri($i, $page_info['count_pages']) . "page=$i";?>"><?= $i?></a>
         </li>
         <? endfor; ?>
         <li class="pages__item">
-            <?= ($page != $count_pages ? "<a href=\"" . clear_pagination_uri($page, $count_pages) . "page=" . $page_next . "\">Следующая страница</a>" : "<span class=\"pages__next\">Следующая страница</span>");?>
+            <?= ($page_info['page'] != $page_info['count_pages'] ? "<a href=\"" . clear_pagination_uri($page, $page_info['count_pages']) . "page=" . ($page_info['page'] + 1) . "\">Следующая страница</a>" : "<span class=\"pages__next\">Следующая страница</span>");?>
         </li>
     </ul>
 </div>

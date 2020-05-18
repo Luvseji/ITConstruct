@@ -1,25 +1,23 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 $title = 'Каталог';
 $categories_name = select_categories_name();
 if (isset($_GET['cat_id'])) {
     $cat_id = (int) $_GET['cat_id'];
-    $count_categories = get_count_categories();
-    $sql = "SELECT COUNT(*) FROM category WHERE id=$cat_id";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $is_category = mysqli_fetch_row($result);
-    mysqli_free_result($result);
-    if ($is_category[0] != 0) {
+    if (!$categories_name[$cat_id-1]) {
+        header('Location: err404.php');
+    } else {
         $title = $categories_name[$cat_id-1]['name'];
     }
-    else {
-        header('Location: err404.php');
-    }
 }
+ob_start();
 require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
+echo $buffer;
 $price_from = (int) $_GET['from'];
 $price_to = (int) $_GET['to'];
 if ($price_from < 0) {
@@ -28,68 +26,50 @@ if ($price_from < 0) {
 if ($price_to < 0) {
     $price_to = 0;
 }
-$sql = "SELECT COUNT(*) FROM ";
-if ($cat_id == 0 && $price_from == 0 && $price_to == 0) {// default
-    $sql .= "product";
+$query_page = (int) $_GET['page'];
+$sql_count = "SELECT COUNT(*) FROM ";
+$sql_product = "SELECT id, name, image, price FROM product ";
+if (!$cat_id && $price_from == 0 && $price_to == 0) {// default
+    $sql_count .= "product";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-elseif ($cat_id > 0 && $price_from == 0 && $price_to == 0) {// categories without sort
-    $sql .= "product_category_is WHERE category_id=($cat_id)";
+elseif ($cat_id && $price_from == 0 && $price_to == 0) {// categories without sort
+    $sql_count .= "product_category_is WHERE category_id=($cat_id)";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-elseif ($cat_id == 0 && $price_to > 0) {// default with sort
-    $sql .= "product WHERE price BETWEEN $price_from AND $price_to";
+elseif (!$cat_id && $price_from == 0 && $price_to > 0) {// default with sort where price_from empty
+    $sql_count .= "product WHERE price BETWEEN $price_from AND $price_to";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "WHERE price <= $price_to ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-elseif ($cat_id > 0 && $price_to > 0) {// categories with sort
-    $sql .= "product p JOIN product_category_is i ON p.id = i.product_id WHERE i.category_id=($cat_id) AND p.price BETWEEN $price_from AND $price_to";
+elseif (!$cat_id && $price_from > 0 && $price_to > 0) {// default with sort
+    $sql_count .= "product WHERE price BETWEEN $price_from AND $price_to";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "WHERE price BETWEEN $price_from AND $price_to ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-elseif ($cat_id == 0 && $price_from > 0 && $price_to == 0) { // default with sort where price_to empty
-    $sql .= "product WHERE price BETWEEN $price_from AND 99999";
+elseif ($cat_id && $price_from == 0 && $price_to > 0) {// categories with sort where price_from empty
+    $sql_count .= "product p JOIN product_category_is i ON p.id = i.product_id WHERE i.category_id=($cat_id) AND p.price BETWEEN $price_from AND $price_to";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) AND price <= $price_to ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-elseif (($cat_id > 0 && $price_from > 0 && $price_to == 0)) {// categories with sort where price_to empty
-    $sql .= "product p JOIN product_category_is i ON p.id = i.product_id WHERE i.category_id=($cat_id) AND p.price BETWEEN $price_from AND 99999";
+elseif ($cat_id && $price_from > 0 && $price_to > 0) {// categories with sort
+    $sql_count .= "product p JOIN product_category_is i ON p.id = i.product_id WHERE i.category_id=($cat_id) AND p.price BETWEEN $price_from AND $price_to";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) AND price BETWEEN $price_from AND $price_to ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-if (!$result = mysqli_query($link, $sql)) {
-    return false;
+elseif (!$cat_id && $price_from > 0 && $price_to == 0) { // default with sort where price_to empty
+    $sql_count .= "product WHERE price >= $price_from";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "WHERE price >= $price_from ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-$count = mysqli_fetch_row($result);
-mysqli_free_result($result);
-$count_products = $count[0];
-$count_pages = ceil($count_products / PER_PAGE);
-if (!$count_pages) {
-    $count_pages = 1;
+elseif ($cat_id && $price_from > 0 && $price_to == 0) {// categories with sort where price_to empty
+    $sql_count .= "product p JOIN product_category_is i ON p.id = i.product_id WHERE i.category_id=($cat_id) AND p.price >= $price_from";
+    $page_info = get_page_info($sql_count, $query_page);
+    $sql_product .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) AND price >= $price_from ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
-if (isset($_GET['page'])) {
-    $page = (int) $_GET['page'];
-    if ($page < 1) {
-        $page = 1;
-    }
-}
-else {
-    $page = 1;
-}
-if ($page > $count_pages) {
-    $page = $count_pages;
-}
-$start_pos = ($page - 1) * PER_PAGE;
-$sql = "SELECT id, name, image, price FROM product ";
-if ($cat_id == 0 && $price_from == 0 && $price_to == 0) {// default
-    $sql .= "ORDER BY price LIMIT $start_pos, " . PER_PAGE;
-}
-elseif ($cat_id > 0 && $price_from == 0 && $price_to == 0) {// categories without sort
-    $sql .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) ORDER BY price LIMIT $start_pos, " . PER_PAGE;
-}
-elseif ($cat_id == 0 && $price_to > 0) {// default with sort
-    $sql .= "WHERE price BETWEEN $price_from AND $price_to ORDER BY price LIMIT $start_pos, " . PER_PAGE;
-}
-elseif ($cat_id > 0 && $price_to > 0) {// categories with sort
-    $sql .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) AND price BETWEEN $price_from AND $price_to ORDER BY price LIMIT $start_pos, " . PER_PAGE;
-}
-elseif ($cat_id == 0 && $price_from > 0 && $price_to == 0) { // default with sort where price_to empty
-    $sql .= "WHERE price BETWEEN $price_from AND 99999 ORDER BY price LIMIT $start_pos, " . PER_PAGE;
-}
-elseif (($cat_id > 0 && $price_from > 0 && $price_to == 0)) {// categories with sort where price_to empty
-    $sql .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) AND price BETWEEN $price_from AND 99999 ORDER BY price LIMIT $start_pos, " . PER_PAGE;
-}
-if (!$result = mysqli_query($link, $sql)) {
+if (!$result = mysqli_query($link, $sql_product)) {
     return false;
 }
 $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -142,22 +122,18 @@ mysqli_free_result($result);
         <li class="goods__item-wrap"></li>
     </ul>
 </div>
-<?
-$page_prev = $page - 1;
-$page_next = $page + 1;
-?>
 <div class="pages">
     <ul class="pages__inner">
         <li class="pages__item">
-            <?= ($page != 1 ? "<a href=\"" . clear_pagination_uri($page, $count_pages) . "page=" . $page_prev . "\">Предыдущая страница</a>" : "<span class=\"pages__next\">Предыдущая страница</span>");?>
+            <?= ($page_info['page'] != 1 ? "<a href=\"" . clear_pagination_uri($page, $page_info['count_pages']) . "page=" . ($page_info['page'] - 1) . "\">Предыдущая страница</a>" : "<span class=\"pages__next\">Предыдущая страница</span>");?>
         </li>
-        <? for ($i = 1; $i <= $count_pages; $i++): ?>
-        <li class="pages__item <?= ($page == $i ? 'pages__item_current' : '');?>">
-            <a href="<?= clear_pagination_uri($i, $count_pages) . "page=$i";?>"><?= $i?></a>
+        <? for ($i = 1; $i <= $page_info['count_pages']; $i++) : ?>
+        <li class="pages__item <?= ($page_info['page'] == $i ? 'pages__item_current' : '');?>">
+            <a href="<?= clear_pagination_uri($i, $page_info['count_pages']) . "page=$i";?>"><?= $i?></a>
         </li>
         <? endfor; ?>
         <li class="pages__item">
-            <?= ($page != $count_pages ? "<a href=\"" . clear_pagination_uri($page, $count_pages) . "page=" . $page_next . "\">Следующая страница</a>" : "<span class=\"pages__next\">Следующая страница</span>");?>
+            <?= ($page_info['page'] != $page_info['count_pages'] ? "<a href=\"" . clear_pagination_uri($page, $page_info['count_pages']) . "page=" . ($page_info['page'] + 1) . "\">Следующая страница</a>" : "<span class=\"pages__next\">Следующая страница</span>");?>
         </li>
     </ul>
 </div>

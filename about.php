@@ -1,8 +1,13 @@
 <?
+require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
-$title = 'О компании';
+ob_start();
 require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
+$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'О компании' . '$3', $buffer);
+echo $buffer;
 ?>
 <h2>О компании</h2>
 <p><strong>Компания "Нанотехнологии здоровья" - IT-лидер</strong> в области автоматизации ритейла и сферы услуг. По данным авторитетного аналитического агентства «Cnews Analytics», в 2017 г. компания заняла 1 место рейтинга «Крупнейшие поставщики ИТ в рознице»</p>
