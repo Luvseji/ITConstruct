@@ -23,17 +23,16 @@ if (!$result = mysqli_query($link, $sql)) {
 $product = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $product = $product[0];
 mysqli_free_result($result);
+if (!isset($cat_id)) {
+    $cat_id = $product['category_main_id'];
+}
+ob_start();
+require 'inc/temp_head.inc.php';
+$buffer = ob_get_contents();
+ob_end_clean();
 if ($product) {
     $title = $product['name'];
-    if (!isset($cat_id)) {
-    $cat_id = $product['category_main_id'];
-    }
-    ob_start();
-    require 'inc/temp_head.inc.php';
-    $buffer = ob_get_contents();
-    ob_end_clean();
-    $buffer = preg_replace('/<!--#TITLE#-->/i', $title, $buffer);
-    if ($product && $cat_id != $product['category_main_id']) {
+    if ($cat_id != $product['category_main_id']) {
         $buffer = preg_replace("<<!--#CANONICAL#-->>", "<link rel=\"canonical\" href=\"" . $_SERVER['REQUEST_URI'] . "\"/>", $buffer);
     }
     foreach ($categories as $key => $item) {
@@ -44,6 +43,7 @@ if ($product) {
 } else {
     $title = 'Извините, такого товара не существует';
 }
+$buffer = preg_replace('/<!--#TITLE#-->/i', $title, $buffer);
 echo $buffer;
 if ($product) : ?>
 <div class="path content__path">
