@@ -5,6 +5,8 @@ require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
 if (isset($_GET['prod_id'])) {
     $product_id = $_GET['prod_id'];
+} else {
+    header('Location: err404.php');
 }
 if (isset($_GET['cat_id'])) {
     $cat_id = (int) $_GET['cat_id'];
