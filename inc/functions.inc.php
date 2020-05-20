@@ -44,16 +44,6 @@ function clear_pagination_uri($page, $count_pages) {
     }
     return $uri;
 }
-function get_product($prod_id) {
-    global $link;
-    $sql = "SELECT * FROM product WHERE id=$prod_id";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $product = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $product[0];
-}
 function select_news($start_pose, $per_page) {
     global $link;
     $sql = "SELECT id, title, date, announcement FROM news ORDER BY date DESC LIMIT $start_pose, $per_page";
@@ -73,14 +63,6 @@ function get_article($news_id) {
     $product = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
     return $product[0];
-}
-function check_empty($item) {
-    if ($item == '') {
-        return false;
-    }
-    else {
-        return true;
-    }
 }
 function save_form($name, $email, $phone, $details) {
     global $link;

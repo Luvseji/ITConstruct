@@ -6,7 +6,7 @@
         <ul>
             <? foreach ($categories as $item): ?>
             <li class="category-list__item">
-                <a href="catalog.php?cat_id=<?= $item['id']?>" class="category-list__link<?= ($cat_id == $item['id'] || ($_SERVER['SCRIPT_NAME'] == '/product.php' && $main_category && $main_category+1 == $item['id']) ? ' category-list__link_active' : '');?>"><?= $item['name']?></a>
+                <a href="catalog.php?cat_id=<?= $item['id']?>" class="category-list__link<?= ($cat_id == $item['id'] ? ' category-list__link_active' : ''); ?>"><?= $item['name'] ?></a>
             </li>
             <? endforeach; ?>
         </ul>

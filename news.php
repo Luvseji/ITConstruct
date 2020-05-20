@@ -2,6 +2,7 @@
 require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
+require 'inc/init.inc.php';
 $sql = "SELECT COUNT(*) FROM news";
 $query_page = (int) $_GET['page'];
 $page_info = get_page_info($sql, $query_page);
@@ -10,7 +11,7 @@ ob_start();
 require 'inc/temp_head.inc.php';
 $buffer = ob_get_contents();
 ob_end_clean();
-$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'Новости' . '$3', $buffer);
+$buffer = preg_replace('/<!--#TITLE#-->/i', 'Новости', $buffer);
 echo $buffer;
 ?>
 <div class="path content__path">

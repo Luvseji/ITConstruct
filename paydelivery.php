@@ -2,11 +2,12 @@
 require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
+require 'inc/init.inc.php';
 ob_start();
 require 'inc/temp_head.inc.php';
 $buffer = ob_get_contents();
 ob_end_clean();
-$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'Доставка и оплата' . '$3', $buffer);
+$buffer = preg_replace('/<!--#TITLE#-->/i', 'Доставка и оплата', $buffer);
 echo $buffer;
 ?>
 <h2>Доставка</h2>

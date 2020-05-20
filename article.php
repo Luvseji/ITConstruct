@@ -2,16 +2,17 @@
 require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
+require 'inc/init.inc.php';
 if (isset($_GET['news_id'])) {
     $news_id = (int) $_GET['news_id'];
-    $sql = "SELECT COUNT(*) FROM news WHERE id=$news_id";
+    $sql = "SELECT * FROM news WHERE id = $news_id";
     if (!$result = mysqli_query($link, $sql)) {
         header('Location: err404.php');
     }
-    $is_article = mysqli_fetch_row($result);
+    $article = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $article = $article[0];
     mysqli_free_result($result);
-    if ($is_article[0] != 0) {
-        $article = get_article($news_id);
+    if ($article) {
         $title = $article['title'];
     } else {
        $title = 'Извините, такой статьи не существует';
@@ -21,9 +22,9 @@ ob_start();
 require 'inc/temp_head.inc.php';
 $buffer = ob_get_contents();
 ob_end_clean();
-$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
+$buffer = preg_replace('/<!--#TITLE#-->/i', $title, $buffer);
 echo $buffer;
-if ($is_article[0] != 0) : ?>
+if ($article) : ?>
 <div class="path content__path">
     <ul class="path__inner">
         <li class="path__past">

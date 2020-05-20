@@ -1,19 +1,12 @@
-<?
-if ($_SERVER['SCRIPT_NAME'] == '/index.php') {
-    $categories = select_categories();
-} else {
-    $categories = select_categories_name();
-}
-$news_name = select_news_name();
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <link href="http://allfont.ru/allfont.css?fonts=arial-narrow" rel="stylesheet" type="text/css" />
     <link href="css/basic.css" rel="stylesheet" type="text/css">
+    <!--#CANONICAL#-->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-    <title></title>
+    <title><!--#TITLE#--></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>

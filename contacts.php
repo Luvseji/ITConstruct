@@ -2,12 +2,13 @@
 require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
+require 'inc/init.inc.php';
 session_start();
 ob_start();
 require 'inc/temp_head.inc.php';
 $buffer = ob_get_contents();
 ob_end_clean();
-$buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . 'Контакты' . '$3', $buffer);
+$buffer = preg_replace('/<!--#TITLE#-->/i', 'Контакты', $buffer);
 echo $buffer;
 ?>
 <section class="contacts content__contacts">
@@ -50,30 +51,20 @@ echo $buffer;
             $email = clear_str($_POST['email']);
             $details = clear_str($_POST['details']);
             $phone = clear_str($_POST['phone']);
-            if (check_empty($name) == false) {
-                $error_name = 'Поле «Имя» должно быть заполнено<br>';
+            if (empty($name)) {
+                $error .= 'Поле «Имя» должно быть заполнено<br>';
             }
-            if (check_empty($email) == false) {
-                $error_email = 'Поле «Электронная почта» должно быть заполнено<br>';
+            if (empty($email)) {
+                $error .= 'Поле «Электронная почта» должно быть заполнено<br>';
             }
-            if (check_empty($details) == false) {
-                $error_details = 'Поле с описанием должно быть заполнено<br>';
+            if (empty($details)) {
+                $error .= 'Поле с описанием должно быть заполнено<br>';
             }
-            if ($error_name || $error_email || $error_details) { ?>
-                <div class="feedback__server-errors">
-                <?
-                if ($error_name) {
-                    echo $error_name;
-                }
-                if ($error_email) {
-                    echo $error_email;
-                }
-                if ($error_details) {
-                    echo $error_details;
-                }?>
+            if ($error) { ?>
+                <div class="feedback__server-errors"> <?
+                    echo $error; ?>
                 </div> <?
-            }
-            if (!$error_name && !$error_email && !$error_details) {
+            } else {
                 if (!save_form($name, $email, $phone, $details) || !send_email($name, $email, $phone, $details)) { ?>
                     <div class="feedback__server-errors">В отправке вашего сообщения произошла ошибка</div> <?
                 } else { ?>
