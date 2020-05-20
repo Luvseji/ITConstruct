@@ -3,29 +3,37 @@
 <div class="side-bar">
     <section class="category-list content__category-list">
         <h2 class="category-list__headline">Каталог</h2>
-        <ul>
-            <? foreach ($categories as $item): ?>
+        <ul> <?
+            if (count($categories)) :
+                foreach ($categories as $item): ?>
             <li class="category-list__item">
                 <a href="catalog.php?cat_id=<?= $item['id']?>" class="category-list__link<?= ($cat_id == $item['id'] ? ' category-list__link_active' : ''); ?>"><?= $item['name'] ?></a>
             </li>
-            <? endforeach; ?>
+                <? endforeach;
+            else :
+                echo "Категории отсутствуют";
+            endif; ?>
         </ul>
     </section>
     <section class="news content__news">
         <h2 class="news__headline">Новости</h2>
-        <ul>
-            <? foreach ($news_name as $item): ?>
+        <ul> <?
+            if (count($news_name)) :
+                foreach ($news_name as $item): ?>
             <li class="news__item">
                 <a href="article.php?news_id=<?= $item['id']?>" class="news__link">
                     <span class="news__title"><?= $item['title']?></span>
                 </a>
                 <time class="news__date" datetime="<?= $item['date']?>"><?= $item['date']?></time>
             </li>
-            <? endforeach; ?>
+                <? endforeach; ?>
         </ul>
         <span class="news__archive">
             <a href="news.php" class="news__link">Архив новостей</a>
-        </span>
+        </span> <?
+            else :
+                echo "Новости отсутствуют";
+            endif; ?>
     </section>
 </div>
 <? if($_SERVER['SCRIPT_NAME'] == '/index.php') : ?>

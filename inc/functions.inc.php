@@ -3,36 +3,6 @@ function clear_str($data) {
     $new = strip_tags(trim($data));
     return $new;
 }
-function select_categories() {
-    global $link;
-    $sql = "SELECT id, name, image FROM category ORDER BY id";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $categories;
-}
-function select_categories_name() {
-    global $link;
-    $sql = "SELECT id, name FROM category ORDER BY id";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $categories;
-}
-function select_news_name() {
-    global $link;
-    $sql = "SELECT id, title, date FROM news ORDER BY date DESC LIMIT 6";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $news = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $news;
-}
 function clear_pagination_uri($page, $count_pages) {
     $uri = "?";
     if ($_SERVER['QUERY_STRING']) {
@@ -43,26 +13,6 @@ function clear_pagination_uri($page, $count_pages) {
         }
     }
     return $uri;
-}
-function select_news($start_pose, $per_page) {
-    global $link;
-    $sql = "SELECT id, title, date, announcement FROM news ORDER BY date DESC LIMIT $start_pose, $per_page";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $news = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $news;
-}
-function get_article($news_id) {
-    global $link;
-    $sql = "SELECT * FROM news WHERE id=$news_id";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $product = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $product[0];
 }
 function save_form($name, $email, $phone, $details) {
     global $link;
@@ -102,18 +52,6 @@ function send_email($name, $email, $phone, $details) {
         echo '';
     }
     return true;
-}
-function check_main_category($cat_id, $product_id) {
-    global $link;
-    $sql = "SELECT COUNT(*) FROM product WHERE category_main_id=$cat_id AND id=$product_id";
-    if (!$result = mysqli_query($link, $sql)) {
-        return false;
-    }
-    $main_cat = mysqli_fetch_all($result);
-    mysqli_free_result($result);
-    if ($main_cat[0][0] == 0) {
-        return true;
-    }
 }
 function get_page_info($sql_count, $query_page) {
     global $link;

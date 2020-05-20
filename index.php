@@ -11,8 +11,9 @@ $buffer = preg_replace('/<!--#TITLE#-->/i', 'Главная', $buffer);
 echo $buffer;
 ?>
 <div class="category">
-    <ul class="category__inner">
-        <? foreach ($categories as $item): ?>
+    <ul class="category__inner"> <?
+       if (count($categories)) :
+            foreach ($categories as $item): ?>
         <li class="category__item-wrap">
             <div class="category__item">
                 <a href="catalog.php?cat_id=<?= $item['id']?>" class="category__link">
@@ -20,8 +21,11 @@ echo $buffer;
                     <span class="category__title"><?= $item['name']?></span>
                 </a>
             </div>
-        </li>
-        <? endforeach; ?>
+        </li> <?
+            endforeach;
+        else :
+            echo "Категории отсутствуют";
+        endif; ?>
         <li class="category__item-wrap"></li>
     </ul>
 </div>

@@ -69,10 +69,11 @@ elseif ($cat_id && $price_from && !$price_to) {// categories with sort where pri
     $sql_product .= "p JOIN product_category_is i ON p.id = i.product_id WHERE category_id=($cat_id) AND price >= $price_from ORDER BY price LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
 }
 if (!$result = mysqli_query($link, $sql_product)) {
-    return false;
+    $products = [];
+} else {
+    $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
 }
-$products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-mysqli_free_result($result);
 if (count($products)) : ?>
 <div class="path content__path">
     <ul class="path__inner">
@@ -121,6 +122,7 @@ if (count($products)) : ?>
         <li class="goods__item-wrap"></li>
     </ul>
 </div>
+    <? if ($page_info['count_pages'] > 1) : ?>
 <div class="pages">
     <ul class="pages__inner">
         <li class="pages__item">
@@ -137,6 +139,7 @@ if (count($products)) : ?>
     </ul>
 </div>
 <?
+    endif;
 else :
     echo "Ни одного товара не нашлось\n";
 endif;

@@ -3,20 +3,18 @@ require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
-if (isset($_GET['news_id'])) {
-    $news_id = (int) $_GET['news_id'];
-    $sql = "SELECT * FROM news WHERE id = $news_id";
-    if (!$result = mysqli_query($link, $sql)) {
-        header('Location: err404.php');
-    }
-    $article = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    $article = $article[0];
-    mysqli_free_result($result);
-    if ($article) {
-        $title = $article['title'];
-    } else {
-       $title = 'Извините, такой статьи не существует';
-    }
+$news_id = ((int) $_GET['news_id'] >= 0) ? ((int)$_GET['news_id']) : 0;
+$sql = "SELECT * FROM news WHERE id = $news_id";
+if (!$result = mysqli_query($link, $sql)) {
+    header('Location: err404.php');
+}
+$article = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$article = $article[0];
+mysqli_free_result($result);
+if ($article) {
+    $title = $article['title'];
+} else {
+    $title = 'Извините, такой статьи не существует';
 }
 ob_start();
 require 'inc/temp_head.inc.php';

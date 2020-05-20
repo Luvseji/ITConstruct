@@ -38,12 +38,16 @@
                         </li>
                         <li class="navigation__item navigation__item-mob sub-navigation">
                             <a href="#" class="navigation__link sub-navigation__link navigation__link-catalog">Каталог</a>
-                            <ul class="catalog sub-navigation__inner">
-                                <? foreach ($categories as $item): ?>
+                            <ul class="catalog sub-navigation__inner"> <?
+                                if (count($categories)) :
+                                    foreach ($categories as $item): ?>
                                 <li class="catalog__item">
                                     <a href="catalog.php?cat_id=<?= $item['id']?>" class="catalog__link"><?= $item['name']?></a>
-                                </li>
-                                <? endforeach; ?>
+                                </li> <?
+                                    endforeach;
+                                else :
+                                    echo "Категории отсутствуют";
+                                endif; ?>
                             </ul>
                         </li>
                         <li class="navigation__item navigation__item-pc">

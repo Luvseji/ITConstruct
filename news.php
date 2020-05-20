@@ -3,17 +3,23 @@ require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
-$sql = "SELECT COUNT(*) FROM news";
 $query_page = (int) $_GET['page'];
+$sql = "SELECT COUNT(*) FROM news";
 $page_info = get_page_info($sql, $query_page);
-$news = select_news($page_info['start_pos'], PER_PAGE);
+$sql = "SELECT id, title, date, announcement FROM news ORDER BY date DESC LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;
+if (!$result = mysqli_query($link, $sql)) {
+    $news = [];
+} else {
+    $news = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+}
 ob_start();
 require 'inc/temp_head.inc.php';
 $buffer = ob_get_contents();
 ob_end_clean();
 $buffer = preg_replace('/<!--#TITLE#-->/i', 'Новости', $buffer);
 echo $buffer;
-?>
+if (count($news)) : ?>
 <div class="path content__path">
     <ul class="path__inner">
         <li class="path__past">
@@ -37,6 +43,7 @@ echo $buffer;
         <? endforeach; ?>
     </ul>
 </div>
+    <? if ($page_info['count_pages'] > 1) : ?>
 <div class="pages">
     <ul class="pages__inner">
         <li class="pages__item">
@@ -53,4 +60,8 @@ echo $buffer;
     </ul>
 </div>
 <?
+    endif;
+else :
+    echo "Ни одной статьи не нашлось\n";
+endif;
 require 'inc/temp_foot.inc.php';
