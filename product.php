@@ -3,7 +3,9 @@ require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
-$product_id = ((int) $_GET['prod_id'] >= 0) ? ((int)$_GET['prod_id']) : 0;
+if (isset($_GET['prod_id'])) {
+    $product_id = $_GET['prod_id'];
+}
 if (isset($_GET['cat_id'])) {
     $cat_id = (int) $_GET['cat_id'];
     $sql = "SELECT category_id FROM product_category_is WHERE product_id = $product_id";
