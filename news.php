@@ -3,7 +3,7 @@ require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
-$query_page = (int) $_GET['page'];
+$query_page = ((int) $_GET['page'] >= 1) ? ((int)$_GET['page']) : 1;
 $sql = "SELECT COUNT(*) FROM news";
 $page_info = get_page_info($sql, $query_page);
 $sql = "SELECT id, title, date, announcement FROM news ORDER BY date DESC LIMIT " . $page_info['start_pos'] . ", " . PER_PAGE;

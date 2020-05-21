@@ -3,13 +3,15 @@ require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
-if (isset($_GET['prod_id'])) {
-    $product_id = $_GET['prod_id'];
-} else {
+$product_id = ((int) $_GET['prod_id'] >= 1) ? ((int)$_GET['prod_id']) : 0;
+if (!$product_id) {
     header('Location: err404.php');
 }
 if (isset($_GET['cat_id'])) {
-    $cat_id = (int) $_GET['cat_id'];
+    $cat_id = ((int) $_GET['cat_id'] >= 1) ? ((int)$_GET['cat_id']) : 0;
+    if (!$cat_id) {
+        header('Location: err404.php');
+    }
     $sql = "SELECT category_id FROM product_category_is WHERE product_id = $product_id";
     if (!$result = mysqli_query($link, $sql)) {
         header('Location: err404.php');

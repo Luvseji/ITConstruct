@@ -65,9 +65,6 @@ function get_page_info($sql_count, $query_page) {
     if (!$count_pages) {
         $count_pages = 1;
     }
-    if ($query_page < 1) {
-        $query_page = 1;
-    }
     elseif ($query_page > $count_pages) {
         $query_page = $count_pages;
     }

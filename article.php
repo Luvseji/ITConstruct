@@ -3,9 +3,8 @@ require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
-if (isset($_GET['news_id'])) {
-    $news_id = $_GET['news_id'];
-} else {
+$news_id = ((int) $_GET['news_id'] >= 0) ? ((int)$_GET['news_id']) : 0;
+if (!$news_id) {
     header('Location: err404.php');
 }
 $sql = "SELECT * FROM news WHERE id = $news_id";

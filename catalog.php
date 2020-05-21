@@ -5,7 +5,10 @@ require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
 $title = 'Каталог';
 if (isset($_GET['cat_id'])) {
-    $cat_id = (int) $_GET['cat_id'];
+    $cat_id = ((int) $_GET['cat_id'] >= 1) ? ((int)$_GET['cat_id']) : 0;
+    if (!$cat_id) {
+        header('Location: err404.php');
+    }
     foreach ($categories as $key => $item) {
         if ($item['id'] == $cat_id) {
             $cat_id_key = $key;
@@ -25,7 +28,7 @@ $buffer = preg_replace('/<!--#TITLE#-->/i', $title, $buffer);
 echo $buffer;
 $price_from = ((int) $_GET['from'] >= 0) ? ((int)$_GET['from']) : 0;
 $price_to = ((int) $_GET['to'] >= 0) ? ((int)$_GET['to']) : 0;
-$query_page = (int) $_GET['page'];
+$query_page = ((int) $_GET['page'] >= 1) ? ((int)$_GET['page']) : 1;
 $sql_count = "SELECT COUNT(*) FROM ";
 $sql_product = "SELECT id, name, image, price FROM product ";
 if (!$cat_id && !$price_from && !$price_to) {// default
