@@ -3,7 +3,7 @@ require_once 'inc/config.inc.php';
 require 'inc/connection.inc.php';
 require 'inc/functions.inc.php';
 require 'inc/init.inc.php';
-$news_id = ((int) $_GET['news_id'] >= 0) ? ((int)$_GET['news_id']) : 0;
+$news_id = ((int) $_GET['news_id'] >= 1) ? ((int)$_GET['news_id']) : 0;
 if (!$news_id) {
     header('Location: err404.php');
 }

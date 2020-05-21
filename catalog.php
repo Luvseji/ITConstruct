@@ -9,12 +9,8 @@ if (isset($_GET['cat_id'])) {
     if (!$cat_id) {
         header('Location: err404.php');
     }
-    foreach ($categories as $key => $item) {
-        if ($item['id'] == $cat_id) {
-            $cat_id_key = $key;
-        }
-    }
-    if (!isset($cat_id_key)) {
+    $cat_id_key = array_search($cat_id, array_column($categories, 'id'));
+    if ($cat_id_key === false) {
         header('Location: err404.php');
     } else {
         $title = $categories[$cat_id_key]['name'];

@@ -12,6 +12,10 @@ if (isset($_GET['cat_id'])) {
     if (!$cat_id) {
         header('Location: err404.php');
     }
+    $cat_id_key = array_search($cat_id, array_column($categories, 'id'));
+    if ($cat_id_key === false) {
+        header('Location: err404.php');
+    }
     $sql = "SELECT category_id FROM product_category_is WHERE product_id = $product_id";
     if (!$result = mysqli_query($link, $sql)) {
         header('Location: err404.php');
@@ -31,6 +35,7 @@ $product = $product[0];
 mysqli_free_result($result);
 if (!isset($cat_id)) {
     $cat_id = $product['category_main_id'];
+    $cat_id_key = array_search($cat_id, array_column($categories, 'id'));
 }
 ob_start();
 require 'inc/temp_head.inc.php';
@@ -40,11 +45,6 @@ if ($product) {
     $title = $product['name'];
     if ($cat_id != $product['category_main_id']) {
         $buffer = preg_replace("<<!--#CANONICAL#-->>", "<link rel=\"canonical\" href=\"" . $_SERVER['REQUEST_URI'] . "\"/>", $buffer);
-    }
-    foreach ($categories as $key => $item) {
-        if ($item['id'] == $cat_id) {
-            $cat_id_key = $key;
-        }
     }
 } else {
     $title = 'Извините, такого товара не существует';
